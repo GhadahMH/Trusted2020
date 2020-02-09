@@ -148,7 +148,7 @@ hr {
          </label>
  
           <div class="clearfix">
-           <button type="submit" class="signinbtn" onclick="Login">Log in</button>
+           <button type="submit" class="signinbtn" onclick="Login()">Log in</button>
           </div>
         </div>
       </form>
@@ -172,11 +172,16 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+firebase.auth.Auth.Persistence.LOCAL;
+
 </script>
 
 <script>
 
 function Login(){
+
+    window.alert("Helooooo");
+
 
 var Email = document.getElementById("LEmail");
 var Password = document.getElementById("LPassword");
@@ -190,9 +195,11 @@ if(Email != "" || Password != "" )
       var errorCode = error.code;
       var errorMessage = error.message;
 
+      console.log(errorCode);
+      onsole.log(errorMessage);
+
       window.alert("Message : " + errorMessage);
 
-      
 
     });
 }
@@ -202,9 +209,19 @@ else
 }
 
 }
- 
 
+firebase.auth().onAuthStateChange(function(user)
+{
+    if(user)
+    {
+       window.location.href = "Member registeration.html";
+    }
+    else
+    {
+        window.alert("You are not!!!!");
+    }
 
+});
 
 
 </script>

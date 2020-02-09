@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Add a background color when the inputs get focus */
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+  padding: 14px 20px;
+  background-color: #f44336;
+}
+
+/* Float cancel and signup buttons and add an equal width */
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add padding to container elements */
+.container {
+  padding: 16px;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and signup button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .signupbtn {
+     width: 100%;
+  }
+}
+</style>
+<head>
+    <title>Log in page</title>
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
+
+</head>
+<body>
+
+<h2>Log in</h2>
+
+<button onclick="document.getElementById('id01').style.display='block'" style="align:center;">Log in</button>
+
+<div id="id01" class="modal">
+  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+  <form action="action_page.php" style="border:1px solid #ccc">
+        <div class="container">
+          <h1 align="center">Log in</h1>
+
+<div align="center">
+          <label>
+      <input type="radio" name ="signin" id="MemberR" value="Member" style="margin-bottom:16px"> Member
+            <input type="radio" name= "signin" id="PropertyOwnerR" value="PO" style="margin-bottom:15px"> Property owner
+          </label>
+          </div>
+
+          <label for="email"><b>Email</b>
+   <input id="LEmail" type="text" placeholder="Enter Email" name="email" required>
+          </label>
+      
+          <label for="psw"><b>Password</b>
+   <input id="LPassword" type="password" placeholder="Enter Password" name="psw" required>
+         </label>
+ 
+          <div class="clearfix">
+           <button type="submit" class="signinbtn" onclick="Login">Log in</button>
+          </div>
+        </div>
+      </form>
+</div>
+
+
+<script>
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyBVKHsqnVyaPbvPmgzPqEK_9p2Hm4ZucYc",
+  authDomain: "trusted2020-8c803.firebaseapp.com",
+  databaseURL: "https://trusted2020-8c803.firebaseio.com",
+  projectId: "trusted2020-8c803",
+  storageBucket: "trusted2020-8c803.appspot.com",
+  messagingSenderId: "662663714362",
+  appId: "1:662663714362:web:1842f051b9bddf5f48c703",
+  measurementId: "G-QDZ39S220R"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+</script>
+
+<script>
+
+function Login(){
+
+var Email = document.getElementById("LEmail");
+var Password = document.getElementById("LPassword");
+
+if(Email != "" || Password != "" )
+{
+    var result = firebase.auth().signInWithEmailAndPassword(Email , Password);
+
+    result.catch(function(error)
+    {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+
+      window.alert("Message : " + errorMessage);
+
+      
+
+    });
+}
+else 
+{
+   window.alert("Please fill out all fields");
+}
+
+}
+ 
+
+
+
+
+</script>
+
+
+</body>
+</html>

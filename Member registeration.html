@@ -520,28 +520,51 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+
 const auth=firebase.auth();
+
 
 function Register(){
 
-firebase.database().ref("MEMBER").push({
+
+      var email = document.getElementById('MUsername').value;
+      var password = document.getElementById('MPassword').value;
+      if (email.length < 4) {
+        window.alert('Please enter an email address.');
+        return;
+      }
+      if (password.length < 4) {
+        window.alert('Please enter a password.');
+        return;
+      }
+      // Create user with email and pass.
+      // [START createwithemail]
+      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+          
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+      // [END createwithemail]
+    
+
+  firebase.database().ref("MEMBER").push({
   FullName:document.getElementById('MFullName').value,
   Username:document.getElementById('MUsername').value,
   Email:document.getElementById('MEmail').value,
   VerifyEmail:document.getElementById('MVerifyEmail').value,
   Password:document.getElementById('MPassword').value,
   VerifyPassword:document.getElementById('MVerifyPassword').value,
-
-})
-var Email=document.getElementById('MEmail');
-var Password=document.getElementById('MPassword');
-const promise=auth.createUserWithEmailAndPassword(Email.value,Password.value);
-promise.catch(e=> alert(e.message));
-window.alert("you are regestier");
-
-     
-
-}
+  });
+}         
 </script>
 
 </body>

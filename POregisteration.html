@@ -2,6 +2,12 @@
 <html>
 
 <head>
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
+
   <meta charset="utf-8">
   <title>po registeration</title>
   <meta name="generator" content="Google Web Designer 7.1.1.1210">
@@ -439,35 +445,129 @@
     </div>
   </div>
   <img src="assets/logo.png" class="gwd-img-1jy9">
-  <label id="label_1" class="gwd-label-zofq">Member</label>
-  <label id="label_2" class="gwd-label-59jo">Property Owner</label>
-  <input type="radio" id="radio_1" class="gwd-input-e5ui">
-  <input type="radio" id="radio_2" class="gwd-input-1u7z">
+
   <label id="label_3" class="gwd-label-knl5">Full name</label>
+  <input type="text" id="Fullname7" class="gwd-input-1i8y">
+
   <label id="label_5" class="gwd-label-1yow">Email</label>
-  <input type="text" id="text_3" class="gwd-input-1smf">
+  <input type="text" id="PEmail" class="gwd-input-1smf">
+
   <label id="label_6" class="gwd-label-qbgr">Password</label>
-  <input type="text" id="text_4" class="gwd-input-1cso">
+  <input type="password" id="PPassword" class="gwd-input-1cso">
+
   <label id="label_7" class="gwd-label-1dwk">Address line 1</label>
-  <input type="text" id="text_5" class="gwd-input-ovqd">
+  <input type="text" id="PAdressline1" class="gwd-input-ovqd">
+
   <label id="label_8" class="gwd-label-1y5s">City</label>
-  <input type="text" id="text_6" class="gwd-input-plc1">
-  <input type="text" id="text_7" class="gwd-input-1i8y">
+  <input type="text" id="Pcity" class="gwd-input-plc1">
+  
   <label id="label_9" class="gwd-label-ahn4">Verify Email</label>
-  <input type="text" id="text_8" class="gwd-input-gb8j">
+  <input type="text" id="PVerfiyEmail" class="gwd-input-gb8j">
+
   <label id="label_10" class="gwd-label-agbw">Verify Password</label>
-  <input type="text" id="text_9" class="gwd-input-ahwu">
+  <input type="password" id="verfiypass9" class="gwd-input-ahwu">
+
   <label id="label_11" class="gwd-label-8hoy">Address Line 2</label>
-  <input type="text" id="text_11" class="gwd-input-zv5z">
-  <label id="label_12" class="gwd-label-1va4">Zip code</label>
-  <input type="text" id="text_10" class="gwd-input-1sbv">
+  <input type="text" id="PAdressline2" class="gwd-input-1sbv">
+
   <label id="label_13" class="gwd-label-tp5i">Phone Number</label>
-  <input type="text" id="text_12" class="gwd-input-2el8">
-  <gwd-imagebutton id="gwd-imagebutton_1" up-image="" over-image="" down-image="" scaling="cover" class="gwd-imagebutton-13it"></gwd-imagebutton>
-  <label id="label_14" class="gwd-label-oeij">Upload your profile picture</label>
-  <input type="checkbox" id="checkbox_1" class="gwd-input-nms8">
-  <label id="label_15" class="gwd-label-1cg4">I accept the terms of use and privacy policies.</label>
-  <button id="button_1" class="gwd-button-1u4p">Register</button>
+  <input type="text" id="phone" class="gwd-input-2el8">
+
+  <button id="button_1" class="gwd-button-1u4p" onclick="Register()">Register</button>
+
+  <script>
+   
+    // Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyBVKHsqnVyaPbvPmgzPqEK_9p2Hm4ZucYc",
+  authDomain: "trusted2020-8c803.firebaseapp.com",
+  databaseURL: "https://trusted2020-8c803.firebaseio.com",
+  projectId: "trusted2020-8c803",
+  storageBucket: "trusted2020-8c803.appspot.com",
+  messagingSenderId: "662663714362",
+  appId: "1:662663714362:web:1842f051b9bddf5f48c703",
+  measurementId: "G-QDZ39S220R"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+const auth=firebase.auth();
+
+
+function Register(){
+
+
+var Pemail = document.getElementById('PEmail').value;
+var Ppassword = document.getElementById('PPassword').value;
+var PVpassprd=document.getElementById('verfiypass9').value;
+var Pvemail=document.getElementById('PVerfiyEmail').value;
+if (Pemail.length < 4) {
+ window.alert('Please enter an email address.');
+ return;
+}
+if (Ppassword.length < 4) {
+ window.alert('Please enter a password.');
+ return;
+}
+if(Pemail!=Pvemail){
+window.alert('Email and verifyEmail does not match ');
+return;}
+if(Ppassword!=PVpassprd){
+window.alert('Password and VerifyPassword does not match ')
+return;}
+// Create user with email and pass.
+// [START createwithemail]
+firebase.auth().createUserWithEmailAndPassword(Pemail, Ppassword).then(function(user){
+
+
+    firebase.database().ref("PropertyOwner").push({
+FullName:document.getElementById('Fullname7').value,
+Email:document.getElementById('PEmail').value,
+VerfiyEmail:document.getElementById('PVerfiyEmail').value,
+Password:document.getElementById('PPassword').value,
+VerifyPassword:document.getElementById('verfiypass9').value,
+Adressline1:document.getElementById('PAdressline1').value,
+Adressline2:document.getElementById('PAdressline2').value,
+City:document.getElementById('Pcity').value,
+phoneNumber:document.getElementById('phone').value
+
+
+
+});
+window.alert('congrats'); 
+
+
+}).catch(function(error) {
+  // Handle Errors here.
+ 
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // [START_EXCLUDE]
+
+  if (errorCode == 'auth/weak-password') {
+    alert('The password is too weak.');
+   
+  } else {
+    alert(errorMessage);
+  
+  }
+  console.log(error);
+  // [END_EXCLUDE]
+
+
+
+});
+
+
+document.getElementById('PPassword').value = "";
+document.getElementById('verfiypass9').value= "";
+return;
+
+}
+
+
+</script>
 </body>
 
 </html>

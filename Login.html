@@ -124,15 +124,15 @@ hr {
 
 <h2>Log in</h2>
 
-<button onclick="document.getElementById('id01').style.display='block'" style="align:center;">Log in</button>
+<button onclick="document.getElementById('id01').style.display='block'" >Log in</button>
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form action="action_page.php" style="border:1px solid #ccc">
+  <form style="border:1px solid #ccc">
         <div class="container">
-          <h1 align="center">Log in</h1>
+          <h1 >Log in</h1>
 
-<div align="center">
+<div>
           <label>
       <input type="radio" name ="signin" id="MemberR" value="Member" style="margin-bottom:16px"> Member
             <input type="radio" name= "signin" id="PropertyOwnerR" value="PO" style="margin-bottom:15px"> Property owner
@@ -178,52 +178,42 @@ firebase.auth.Auth.Persistence.LOCAL;
 
 <script>
 
-function Login(){
-
-    window.alert("Helooooo");
-
-
-var Email = document.getElementById("LEmail");
-var Password = document.getElementById("LPassword");
-
-if(Email != "" || Password != "" )
+function Login()
 {
-    var result = firebase.auth().signInWithEmailAndPassword(Email , Password);
 
-    result.catch(function(error)
-    {
-      var errorCode = error.code;
-      var errorMessage = error.message;
+    var Email = document.getElementById("MEmail").value;
+      var Password = document.getElementById("MPassword").value;
+      if (Email.length === 0) {
+        window.alert('Please enter an email address.');
+        return;
+        }
+      if (Password.length === "" ) {
+         window.alert('Please enter a password.');
+        return;
+         }
+      if (Email.length < "" ) {
+        window.alert('Your email address is uncomplete.');
+        return;
+        }
+      if (Password.length < 4) {
+         window.alert('Your password is uncomplete.');
+        return;
+         }
+            var result = firebase.auth().signInWithEmailAndPassword(Email , Password);
+      
+           result.catch(function(error)
+            {
+                var errorCode = error.code;
+                  var errorMessage = error.message;
+                  window.alert("Message : " + errorMessage);
+             });
 
-      console.log(errorCode);
-      onsole.log(errorMessage);
-
-      window.alert("Message : " + errorMessage);
-
-
-    });
-}
-else 
-{
-   window.alert("Please fill out all fields");
-}
-
-}
-
-firebase.auth().onAuthStateChange(function(user)
-{
-    if(user)
-    {
-       window.location.href = "Member registeration.html";
-    }
-    else
-    {
-        window.alert("You are not!!!!");
-    }
-
-});
-
-
+                 var user1 = firebase.auth().currentUser;
+  
+                   if(user1)
+                   {
+                    window.location.href = "HomePage.html";
+                    }}
 </script>
 
 

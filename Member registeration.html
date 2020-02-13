@@ -536,28 +536,31 @@ function Register(){
        window.alert('Please enter an email address.');
        return;
      }
+     
      if (password.length < 4) {
        window.alert('Please enter a password.');
-       return;
-   }
-   if(email!=vemail){
-   window.alert('Email and verifyEmail does not match ');
-   return;}
-   if(password!=Vpassprd){
-   window.alert('Password and VerifyPassword does not match ')
-   return;}
+       return;}
+
+      if(email!=vemail){
+         window.alert('Email and verifyEmail does not match ');
+          return;}
+
+      if(password!=Vpassprd){
+          window.alert('Password and VerifyPassword does not match ');
+           return;}
       // Create user with email and pass.
       // [START createwithemail]
       firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
      
 
-          firebase.database().ref("MEMBER").push({
+      firebase.database().ref("MEMBER").push({
       FullName:document.getElementById('MFullName').value,
-  Username:document.getElementById('MUsername').value,
-  Email:document.getElementById('MEmail').value,
-  VerifyEmail:document.getElementById('MVerifyEmail').value,
-  Password:document.getElementById('MPassword').value,
-  VerifyPassword:document.getElementById('MVerifyPassword').value,
+      Username:document.getElementById('MUsername').value,
+      Email:document.getElementById('MEmail').value,
+      VerifyEmail:document.getElementById('MVerifyEmail').value,
+      Password:document.getElementById('MPassword').value,
+     VerifyPassword:document.getElementById('MVerifyPassword').value,
+
   });
   window.alert('congrats'); 
  

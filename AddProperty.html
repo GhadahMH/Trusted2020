@@ -611,10 +611,7 @@
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
 
-
-    function addProperty() {
-
-
+   function addProperty() {
       var PropertN = document.getElementById("Name").value;
       var DescriptionN = document.getElementById("Des").value;
       var AddressN = document.getElementById("Address").value;
@@ -622,7 +619,10 @@
       var TypeN = document.getElementById("Type").value;
       var PriceN = document.getElementById("Price").value;
       var OtherInformationN = document.getElementById("OtherInformation").value;
-      var Picture = document.getElementById("Picture").files[0];
+
+
+      
+     /* var Picture = document.getElementById("Picture").files[0];
       
       var PictureName = Picture.name;
       var storageRef = firebase.storage().ref('images/' + PictureName);
@@ -645,15 +645,10 @@
         })
 
       })
-
-    }
-
-
-
     if (PropertN.length === "") {
       window.alert('The Name of Property is Required!');
       return;
-    }
+   } 
 
     if (DescriptionN.length === "") {
       window.alert('The Description of Property is Required!');
@@ -680,10 +675,34 @@
       return;
     }
 
+*/
 
+    firebase.auth().onAuthStateChanged(function(user) {
+  
 
+  if (user) {
+   
+    var id=firebase.auth().currentUser.uid;
+    window.alert(id);
+    firebase.database().ref("Property").push({
+PownerID:id,
+propertyID:Math.random(),
+PropertyName: PropertN,
+Description: DescriptionN,
+Address: AddressN,
+City: CityN,
+Type: TypeN,
+Price: PriceN,
+OtherInformation: OtherInformationN,
+  });} else {
+   
+  }
+    
+});
+    
+}
 
-    firebase.database().ref("PropertyOwner./Property").push({
+    /*firebase.database().ref("PropertyOwner./Property").push({
 
       PropertyName: PropertN,
       Description: DescriptionN,
@@ -697,7 +716,7 @@
 
     });
 
-    window.alert("You Property is 2 add!");
+    window.alert("You Property is 2 add!");*/
   </script>
 </body>
 

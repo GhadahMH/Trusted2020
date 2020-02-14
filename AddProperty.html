@@ -548,6 +548,7 @@
       left: 363px;
       top: 151px;
     }
+
   </style>
 </head>
 
@@ -559,8 +560,8 @@
         <div class="Header">
           <!-- <img src="logo.png" width="180" height="203"> -->
           <ul>
-            <li><a href=""> Holiday Homes</a></li>
-            <li><a href="">Sign In</a></li>
+            <li><a href="HolidayHomes.html"> Holiday Homes</a></li>
+            <li><a href="NewLoginDesign.html">Sign In</a></li>
             <li><a href=""> العربية</a></li>
           </ul>
         </div>
@@ -587,14 +588,14 @@
   <input type="file" id="image" accept="image/*" class="gwd-input-wbuy"><br>
   
   <button id="Add" class="gwd-button-cwew" onclick="addProperty()">Add</button>
-  <input type="text" id="Name" class="gwd-input-1o47">
-  <input type="text" id="Des" class="gwd-input-1c5b">
-  <input type="text" id="Address" class="gwd-input-13af">
-  <input type="text" id="City" class="gwd-input-xmk2">
-  <input type="text" id="Type" class="gwd-input-19zb">
-  <input type="text" id="Price" class="gwd-input-1lj1">
-  <input type="text" id="OtherInformation" class="gwd-input-sf88">
-  <input type="text" id="Picture" class="gwd-input-1ndl">
+  <input type="text" id="Name" class="gwd-input-1o47" required/>
+  <input type="text" id="Des" class="gwd-input-1c5b"required/>
+  <input type="text" id="Address" class="gwd-input-13af"required/>
+  <input type="text" id="City" class="gwd-input-xmk2"required/>
+  <input type="text" id="Type" class="gwd-input-19zb"required/>
+  <input type="text" id="Price" class="gwd-input-1lj1"required/>
+  <input type="text" id="OtherInformation" class="gwd-input-sf88"required/>
+  <input type="text" id="Picture" class="gwd-input-1ndl"required/>
   <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -644,38 +645,39 @@
           console.log(downlaodURL);
         })
 
-      })
-    if (PropertN.length === "") {
+      })*/
+
+    /*if (PropertN === "") {
       window.alert('The Name of Property is Required!');
       return;
    } 
 
-    if (DescriptionN.length === "") {
+    if (DescriptionN === "") {
       window.alert('The Description of Property is Required!');
       return;
     }
 
-    if (AddressN.length === "") {
+    if (AddressN === "") {
       window.alert('The Address of Property is Required!');
       return;
     }
 
-    if (CityN.length === "") {
+    if (CityN  === "") {
       window.alert('The City of Property is Required!');
       return;
     }
 
-    if (TypeN.length === "") {
+    if (TypeN  === "") {
       window.alert('The Type of Property is Required!');
       return;
     }
 
-    if (Picture.length === "") {
+    /*if (Picture === "") {
       window.alert('The Price of Property is Required!');
       return;
-    }
+    }*/
 
-*/
+
 
     firebase.auth().onAuthStateChanged(function(user) {
   

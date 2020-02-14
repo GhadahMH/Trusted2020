@@ -19,8 +19,7 @@
         <div class="Header">
           <!-- <img src="logo.png" width="180" height="203"> -->
           <ul>
-            <li><a href=""> Holiday Homes</a></li>
-            <li><a href="">Sign In</a></li>
+            <li><a href="HolidayHomes.html"> Holiday Homes</a></li>
             <li><a href=""> Arabic</a></li>
           </ul>
         </div>
@@ -44,7 +43,8 @@
   <div class="cont">
     <div class="form sign-in">
       <h2 id="HeadingLogin">Welcome back </h2>
-      <label><input type="radio" class="RadioGroup" name="signin" id="MemberR">Member <input type="radio" class="RadioGroup" name="signin" id="PropertyOwnerR">Property owner</label>
+      <input type="radio" class="RadioGroup" name="signin" id="MemberR" text="Member">
+      <input type="radio" class="RadioGroup" name="signin" id="PropertyOwnerR" text="Property owner">
       <br>
       <br>
       <label id="label_5">
@@ -71,32 +71,10 @@
           <h2 id="labelNew">New here?</h2>
           <br>
           <p id="labelNew">Sign up and discover variety of trusted Holiady home across Saudi Arabia!</p>
+          <button  type="button" onclick="SL()"> Sign Up </button>
         </div>
 
-        <div class="img__btn">
-          <span class="m--up">Sign Up</span>
-          <span class="m--in">Sign In</span>
-        </div>
-      </div>
-      <div class="form sign-up">
-        <h2>Time to feel like home,</h2>
-        <label>
-          <span>Name</span>
-          <input type="text" />
-        </label>
-        <label>
-          <span>Email</span>
-          <input type="email" />
-        </label>
-        <label>
-          <span>Password</span>
-          <input type="password" />
-        </label>
-        <button type="submit" class="submit-singUp">Sign Up</button>
-      </div>
-    </div>
-  </div>
-
+    
   <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -159,6 +137,18 @@ function Login()
   
 
 }
+function SL(){
+
+ if(document.getElementById('MemberR').checked){
+  window.open("Memberregisteration.html");
+ }
+else
+if(document.getElementById('PropertyOwnerR').checked){
+  window.open("POregisteration.html");
+}
+
+}
+
 </script>
 
 

@@ -518,10 +518,12 @@ window.alert('Password and VerifyPassword does not match ')
 return;}
 // Create user with email and pass.
 // [START createwithemail]
+var PropertOwneruid =firebase.auth().currentUser.uid;
 firebase.auth().createUserWithEmailAndPassword(Pemail, Ppassword).then(function(user){
 
 
     firebase.database().ref("PropertyOwner").push({
+       PID :firebase.auth().currentUser.uid,
 FullName:document.getElementById('Fullname7').value,
 Email:document.getElementById('PEmail').value,
 VerfiyEmail:document.getElementById('PVerfiyEmail').value,

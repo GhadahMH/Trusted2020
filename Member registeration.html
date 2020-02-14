@@ -550,10 +550,12 @@ function Register(){
            return;}
       // Create user with email and pass.
       // [START createwithemail]
+      var Memberuid =firebase.auth().currentUser.uid;
       firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
      
 
       firebase.database().ref("MEMBER").push({
+        MID :firebase.auth().currentUser.uid,
       FullName:document.getElementById('MFullName').value,
       Username:document.getElementById('MUsername').value,
       Email:document.getElementById('MEmail').value,

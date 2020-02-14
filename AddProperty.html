@@ -614,7 +614,6 @@
 
     function addProperty() {
 
-      window.alert("You Property is 1 add!");
 
       var PropertN = document.getElementById("Name").value;
       var DescriptionN = document.getElementById("Des").value;
@@ -684,7 +683,7 @@
 
 
 
-    firebase.database().ref("PropertyOwner/Property").push({
+    firebase.database().ref("PropertyOwner./Property").push({
 
       PropertyName: PropertN,
       Description: DescriptionN,

@@ -589,10 +589,9 @@
     <form enctype="multipart/form-data">
   <p class="gwd-p-1k06">Picture</p>
   <input type="file" id="Picture" accept="Picture/*" class="gwd-input-wbuy"><br>
-  <button type="button" onclick="Uplode()">Uplode</button>
-    </form>
- 
-  <button id="Add" class="gwd-button-cwew" onclick="addProperty()">Add</button>
+  <button id="Add" type="button" class="gwd-button-cwew" onclick="addProperty()">Add</button>
+    </form> 
+
   <input type="text" id="Name" class="gwd-input-1o47" required/>
   <input type="text" id="Des" class="gwd-input-1c5b"required/>
   <input type="text" id="Address" class="gwd-input-13af"required/>
@@ -682,28 +681,8 @@ OtherInformation: OtherInformationN,
   }
     
 });
-    
-}
 
-    /*firebase.database().ref("PropertyOwner./Property").push({
-
-      PropertyName: PropertN,
-      Description: DescriptionN,
-      Address: AddressN,
-      City: CityN,
-      Type: TypeN,
-      Price: PriceN,
-      OtherInformation: OtherInformationN,
-      Picture: PictureN,
-
-
-    });
-
-    window.alert("You Property is 2 add!");*/
-
-    function Uplode()
-    {
-      var Picture = document.getElementById("Picture").files[0];
+var Picture = document.getElementById("Picture").files[0];
       
       var PictureName = Picture.name;
       var storageRef = firebase.storage().ref('images/' + PictureName);
@@ -727,8 +706,26 @@ OtherInformation: OtherInformationN,
 
       });
       window.alert("Pic is upload");
+    
+}
 
-    }
+    /*firebase.database().ref("PropertyOwner./Property").push({
+
+      PropertyName: PropertN,
+      Description: DescriptionN,
+      Address: AddressN,
+      City: CityN,
+      Type: TypeN,
+      Price: PriceN,
+      OtherInformation: OtherInformationN,
+      Picture: PictureN,
+
+
+    });
+
+    window.alert("You Property is 2 add!");*/
+
+   
 
   </script>
 </body>

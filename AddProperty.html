@@ -584,9 +584,14 @@
   <p class="gwd-p-1aqr">Type</p>
   <p class="gwd-p-1nmr">Price</p>
   <p class="gwd-p-1gu3">Other Information</p>
+
+ 
+    <form enctype="multipart/form-data">
   <p class="gwd-p-1k06">Picture</p>
-  <input type="file" id="image" accept="image/*" class="gwd-input-wbuy"><br>
-  
+  <input type="file" id="Picture" accept="Picture/*" class="gwd-input-wbuy"><br>
+  <button type="button" onclick="Uplode()">Uplode</button>
+    </form>
+ 
   <button id="Add" class="gwd-button-cwew" onclick="addProperty()">Add</button>
   <input type="text" id="Name" class="gwd-input-1o47" required/>
   <input type="text" id="Des" class="gwd-input-1c5b"required/>
@@ -595,7 +600,8 @@
   <input type="text" id="Type" class="gwd-input-19zb"required/>
   <input type="text" id="Price" class="gwd-input-1lj1"required/>
   <input type="text" id="OtherInformation" class="gwd-input-sf88"required/>
-  <input type="text" id="Picture" class="gwd-input-1ndl"required/>
+  
+ <!-- <input type="text" id="Picture" class="gwd-input-1ndl"required/> -->
   <script>
     // Your web app's Firebase configuration
     var firebaseConfig = {
@@ -621,31 +627,6 @@
       var PriceN = document.getElementById("Price").value;
       var OtherInformationN = document.getElementById("OtherInformation").value;
 
-
-      
-     /* var Picture = document.getElementById("Picture").files[0];
-      
-      var PictureName = Picture.name;
-      var storageRef = firebase.storage().ref('images/' + PictureName);
-      var uploadTask = storageRef.put(Picture);
-
-      uploadTask.on('state_changed', function(snapshot) {
-
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("upload is " + progress + "done")
-
-      }, function(error) {
-        //here error
-        console.log(error.message);
-
-      }, function() {
-        //here successful
-        uploadTask.snapshot.ref.getdownloadURL().then(function(downlaodURL) {
-          // get upload pic here
-          console.log(downlaodURL);
-        })
-
-      })*/
 
     if (PropertN === "") {
       window.alert('The Name of Property is Required!');
@@ -719,6 +700,36 @@ OtherInformation: OtherInformationN,
     });
 
     window.alert("You Property is 2 add!");*/
+
+    function Uplode()
+    {
+      var Picture = document.getElementById("Picture").files[0];
+      
+      var PictureName = Picture.name;
+      var storageRef = firebase.storage().ref('images/' + PictureName);
+      var uploadTask = storageRef.put(Picture);
+
+      uploadTask.on('state_changed', function(snapshot) {
+
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("upload is " + progress + "done")
+
+      },function(error) {
+        //here error
+        console.log(error.message);
+
+      }, function() {
+        //here successful
+        uploadTask.snapshot.ref.getdownloadURL().then(function(downlaodURL) {
+          // get upload pic here
+          console.log(downlaodURL);
+        });
+
+      });
+      window.alert("Pic is upload");
+
+    }
+
   </script>
 </body>
 

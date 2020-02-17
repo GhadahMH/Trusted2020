@@ -1,6 +1,28 @@
 <!DOCTYPE html>
 <html>
     <head>
+
+      <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
+
+      <style>
+        table {
+          font-family: arial, sans-serif;
+          width: 100%;
+        }
+        
+        td, th {
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+
     <meta charset="utf-8">
   <title>Holiday Homes</title>
 
@@ -101,7 +123,7 @@
 
     <body>
     <nav>
-        <div class="Header">
+        <div class="Heeader">
 
           <ul>
             <li><a href="HomePage.html">Home</a></li>
@@ -116,18 +138,88 @@
         <svg width="2550" height="2200" class="gwd-svg-j0fp">
           <rect x="0" y="200" rx="10" ry="10" width="2550" height="2000" style="fill: rgb(48, 0, 149); z-index: 10;"></rect>
           <rect x="21" y="240" rx="10" ry="10" width="2500" height="1900" style="fill: rgb(255,255,255); stroke-linecap: butt; z-index: 20;"></rect>
-            <!--Holiday Home boxes -->
-        <rect x="150" y="345" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
-        <rect x="150" y="655" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
+            
+        <!--Holiday Home boxes -->
+
+        
+        <rect x="150" y="345" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> 
+        
+        </rect>
+        <rect  id ="10R" x="150" y="655" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
         <rect x="150" y="955" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
         <rect x="150" y="1255" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
         <rect x="150" y="1555" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
         <rect x="150" y="1855" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
+             
         </svg>
+     
+
+ <!--      
+<table>
+  <tr>
+    <th>picture</th>
+    <th>Name</th>
+    <th>dec</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+
+</table>
+-->
       </div>
 
-  <img src="assets/logo.png" class="webLogo">
+  
+<img src="assets/logo.png" class="webLogo">
 <input type="text" id="Search" class="searchBox" placeholder="Enter City">
-        <button id="button_1" class="searchBtn">Search</button>
+        <button id="button_1" class="searchBtn" onclick="search()">Search</button>
+
+ <script>
+   
+   // Your web app's Firebase configuration
+var firebaseConfig = {
+ apiKey: "AIzaSyBVKHsqnVyaPbvPmgzPqEK_9p2Hm4ZucYc",
+ authDomain: "trusted2020-8c803.firebaseapp.com",
+ databaseURL: "https://trusted2020-8c803.firebaseio.com",
+ projectId: "trusted2020-8c803",
+ storageBucket: "trusted2020-8c803.appspot.com",
+ messagingSenderId: "662663714362",
+ appId: "1:662663714362:web:1842f051b9bddf5f48c703",
+ measurementId: "G-QDZ39S220R"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+
+function search(){
+  var rootRef=firebase.database().ref().child("Property")
+  rootRef.on("child_added"), snap=>{
+    var Description1=snap.child("Description").val();
+    alert(snap.val());
+    /*("10R").append();*/
+  }
+}
+
+
+</script>
+
+
     </body>
 </html>

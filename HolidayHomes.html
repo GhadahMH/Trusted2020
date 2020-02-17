@@ -209,12 +209,14 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 function search(){
-  var rootRef=firebase.database().ref().child("Property")
-  rootRef.on("child_added"), snap=>{
+  window.alert("hi"); 
+  var rootRef = firebase.database().ref().child("Property");
+  rootRef.on("child_added", snap => {
     var Description1=snap.child("Description").val();
-    alert(snap.val());
+    window.alert(snap.val());
     /*("10R").append();*/
-  }
+  });
+  window.alert("hi2"); 
 }
 
 

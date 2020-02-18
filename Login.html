@@ -114,6 +114,7 @@ hr {
 <head>
     <title>Log in page</title>
 
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
@@ -128,11 +129,11 @@ hr {
 
 <div id="id01" class="modal">
   <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form action="action_page.php" style="border:1px solid #ccc">
+  <form style="border:1px solid #ccc">
         <div class="container">
           <h1 align="center">Log in</h1>
 
-<div align="center">
+             <div align="center">
           <label>
       <input type="radio" name ="signin" id="MemberR" value="Member" style="margin-bottom:16px"> Member
             <input type="radio" name= "signin" id="PropertyOwnerR" value="PO" style="margin-bottom:15px"> Property owner
@@ -183,32 +184,35 @@ function Login(){
     window.alert("Helooooo");
 
 
-var Email = document.getElementById("LEmail");
-var Password = document.getElementById("LPassword");
+      var email = document.getElementById('LEmail').value;
+        var password = document.getElementById('LPassword').value;
+       if (email.length < 4) {
+        window.alert('Please enter an email address.');
+        return;
+      }
+       if (password.length < 4) {
+        window.alert('Please enter a password.');
+        return;
+      }
 
-if(Email != "" || Password != "" )
+if(email != "" || password != "" )
 {
-    var result = firebase.auth().signInWithEmailAndPassword(Email , Password);
-
-    result.catch(function(error)
-    {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-
-      console.log(errorCode);
-      onsole.log(errorMessage);
-
-      window.alert("Message : " + errorMessage);
-
-
-    });
+    var result = firebase.auth().signInWithEmailAndPassword(email , password);
+  
+    result.then( function(user){
+    console.log("Authenticated successfully with payload:", user);
+    auth = user;
+  })
+  .catch(function(error){
+    console.log("Login Failed!", error);
+  });
 }
 else 
 {
    window.alert("Please fill out all fields");
 }
 
-}
+
 
 firebase.auth().onAuthStateChange(function(user)
 {
@@ -222,6 +226,8 @@ firebase.auth().onAuthStateChange(function(user)
     }
 
 });
+
+}
 
 
 </script>

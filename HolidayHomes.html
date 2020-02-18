@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
       <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
       <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
@@ -135,61 +135,14 @@
 
         <!-- Frame/Body-->
       <div class="frame">
-        <svg width="2550" height="2200" class="gwd-svg-j0fp">
-          <rect x="0" y="200" rx="10" ry="10" width="2550" height="2000" style="fill: rgb(48, 0, 149); z-index: 10;"></rect>
-          <rect x="21" y="240" rx="10" ry="10" width="2500" height="1900" style="fill: rgb(255,255,255); stroke-linecap: butt; z-index: 20;"></rect>
-            
-        <!--Holiday Home boxes -->
-
-        
-        <rect x="150" y="345" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> 
-        
-        </rect>
-        <rect  id ="10R" x="150" y="655" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
-        <rect x="150" y="955" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
-        <rect x="150" y="1255" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
-        <rect x="150" y="1555" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
-        <rect x="150" y="1855" rx="10" ry="10" width="2200" height="270" style="fill: rgb(255,255,255); z-index: 30; stroke-width: 3px; stroke: rgb(0,0,0);"> </rect>
-             
-        </svg>
-     
-
- <!--      
-<table>
-  <tr>
-    <th>picture</th>
-    <th>Name</th>
-    <th>dec</th>
-  </tr>
-  <tr>
-    <td>Alfreds Futterkiste</td>
-    <td>Maria Anders</td>
-    <td>Germany</td>
-  </tr>
-  <tr>
-    <td>Centro comercial Moctezuma</td>
-    <td>Francisco Chang</td>
-    <td>Mexico</td>
-  </tr>
-  <tr>
-    <td>Ernst Handel</td>
-    <td>Roland Mendel</td>
-    <td>Austria</td>
-  </tr>
-  <tr>
-    <td>Island Trading</td>
-    <td>Helen Bennett</td>
-    <td>UK</td>
-  </tr>
-
-</table>
--->
-      </div>
+        <svg width="2550" height="2200" class="gwd-svg-j0fp"> </svg>
+ </script>
+       </div>
 
   
 <img src="assets/logo.png" class="webLogo">
 <input type="text" id="Search" class="searchBox" placeholder="Enter City">
-        <button id="button_1" class="searchBtn" onclick="search()">Search</button>
+        <button id="button_1" class="searchBtn" onclick="search1()">Search</button>
 
  <script>
    
@@ -208,29 +161,15 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-function search(){
+function search1(){
   var Arr = [];
   var rootRef = firebase.database().ref().child("Property");
   rootRef.on("child_added", snap => {
-    var Description1=snap.child("Adressline1").val();
-    Arr.push(Description1);
-    window.alert(snap.val());
-    window.alert(Arr.toString());
-    /*("10R").append();*/
-  });
-
-}
-
-function snapshotToArray(snapshot) {
-    var returnArr = [];
-
-    snapshot.forEach(function(childSnapshot) {
-        var item = childSnapshot.val();
-      returnArr.push(item);
-    });
-
-    return returnArr;
-};
+  var Description1=snap.child("Description").val();
+  var Price1=snap.child("Price").val();
+  var PropertyName1=snap.child("PropertyName").val();
+  var Type=snap.child("Type").val();
+    /*("10R").append();*/  });}
 </script>
 
 

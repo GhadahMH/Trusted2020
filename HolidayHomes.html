@@ -209,17 +209,28 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
 function search(){
-  window.alert("hi"); 
+  var Arr = [];
   var rootRef = firebase.database().ref().child("Property");
   rootRef.on("child_added", snap => {
-    var Description1=snap.child("Description").val();
+    var Description1=snap.child("Adressline1").val();
+    Arr.push(Description1);
     window.alert(snap.val());
+    window.alert(Arr.toString());
     /*("10R").append();*/
   });
-  window.alert("hi2"); 
+
 }
 
+function snapshotToArray(snapshot) {
+    var returnArr = [];
 
+    snapshot.forEach(function(childSnapshot) {
+        var item = childSnapshot.val();
+      returnArr.push(item);
+    });
+
+    return returnArr;
+};
 </script>
 
 

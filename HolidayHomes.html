@@ -161,9 +161,11 @@
            <td>Description</td>
            <td>fdf</td>
         </thead>
-        <tbody id="SSSSSH">
+        <tbody id="table_body">
           <td id="dec"></td>
-          <td id="name"></td>
+          <td ></td>
+          <td  ></td>
+          <td ></td>
         </tbody>
           
         
@@ -174,9 +176,9 @@
                 
 <img src="assets/logo.png" class="webLogo">
 <input type="text" id="Search" class="searchBox" placeholder="Enter City">
-<button id="button_1" class="searchBtn" onclick="search()">Search</button>
+<button id="button_1" class="searchBtn" onclick="search1()">Search</button>
         
-
+<input class="width150" type="text" id="txtsearch"   />
 
  <script>
    
@@ -195,6 +197,26 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
+
+function search1(){
+  window.alert('hi');
+  var Arr = [];
+  var rootRef = firebase.database().ref().child("Property");
+
+  rootRef.on('value', snapshot => {
+  snapshot.forEach(snap => {
+    const Description1=snap.child("Description").val();
+    const Price1=snap.child("Price").val();
+    const PropertyName1=snap.child("PropertyName").val();
+    const Type=snap.child("Type").val();
+    const City=snap.child("City").val();
+    var citys=document.getElementById('Search').value;
+if(City==citys){
+    $("#table_body").append("<tr><td>" + Description1 + "</td><td>" + Price1 + "</td><td>" + PropertyName1 + "</td><td>" + Type +"</td></tr>");}
+  });
+});
+
+    /*("10R").append();*/ }
 </script>
 
 

@@ -467,8 +467,8 @@
         <div class="Header">
           <!-- <img src="logo.png" width="180" height="203"> -->
           <ul>
-            <li><a href=""> Holiday Homes</a></li>
-            <li><a href="">Sign In</a></li>
+            <li><a href="HolidayHomes.html"> Holiday Homes</a></li>
+            <li><a href="NewLoginDesign.html">Sign In</a></li>
             <li><a href=""> Arabic</a></li>
           </ul>
         </div>
@@ -494,14 +494,14 @@
   <label id="label_8" class="gwd-label-1914">Verify Password:</label>
  
  
-  <input type="text" id="MFullName" class="gwd-input-1ek9">
-  <input type="text" id="MUsername" class="gwd-input-1pgs">
-  <input type="text" id="MEmail" class="gwd-input-10u3">
-  <input type="text" id="MVerifyEmail" class="gwd-input-abhm">
-  <input type="text" id="MPassword" class="gwd-input-147i">
-  <input type="text" id="MVerifyPassword" class="gwd-input-1myr">
+  <input type="text" id="MFullName" class="gwd-input-1ek9"  required>
+  <input type="text" id="MUsername" class="gwd-input-1pgs"required>
+  <input type="email" id="MEmail" class="gwd-input-10u3"required>
+  <input type="text" id="MVerifyEmail" class="gwd-input-abhm"required>
+  <input type="password" id="MPassword" class="gwd-input-147i"required>
+  <input type="password" id="MVerifyPassword" class="gwd-input-1myr" required>
 
- <button id="button_1" class="gwd-button-1u4p" onclick="Register()">Register</button>
+ <button id="button_1" class="gwd-button-1u4p" onclick="Register()"  >Register</button>
 
 
   <script>
@@ -527,48 +527,90 @@ const auth=firebase.auth();
 function Register(){
 
 
-      var email = document.getElementById('MUsername').value;
+
+      var email = document.getElementById('MEmail').value;
       var password = document.getElementById('MPassword').value;
-      if (email.length < 4) {
-        window.alert('Please enter an email address.');
-        return;
-      }
-      if (password.length < 4) {
-        window.alert('Please enter a password.');
-        return;
-      }
+      var Vpassprd=document.getElementById('MVerifyPassword').value;
+      var vemail=document.getElementById('MVerifyEmail').value;
+     if (email.length < 4) {
+       window.alert('Please enter an email address.');
+       return;
+     }
+     
+     if (password.length < 4) {
+       window.alert('Please enter a password.');
+       return;}
+
+      if(email!=vemail){
+         window.alert('Email and verifyEmail does not match ');
+          return;}
+
+      if(password!=Vpassprd){
+          window.alert('Password and VerifyPassword does not match ');
+           return;}
       // Create user with email and pass.
       // [START createwithemail]
-      firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      var Memberuid =firebase.auth().currentUser.uid;
+      firebase.auth().createUserWithEmailAndPassword(email, password).then(function(user){
+     
+
+      firebase.database().ref("MEMBER").push({
+        MID :firebase.auth().currentUser.uid,
+      FullName:document.getElementById('MFullName').value,
+      Username:document.getElementById('MUsername').value,
+      Email:document.getElementById('MEmail').value,
+      VerifyEmail:document.getElementById('MVerifyEmail').value,
+      Password:document.getElementById('MPassword').value,
+     VerifyPassword:document.getElementById('MVerifyPassword').value,
+
+  });
+  window.alert('congrats'); 
+ 
+
+      }).catch(function(error) {
         // Handle Errors here.
+       
         var errorCode = error.code;
         var errorMessage = error.message;
         // [START_EXCLUDE]
+ 
         if (errorCode == 'auth/weak-password') {
           alert('The password is too weak.');
+         
         } else {
           alert(errorMessage);
-          
+        
         }
         console.log(error);
         // [END_EXCLUDE]
-
-        ///jjjj
-        /////hhh
-        ///hala
-      });
-      // [END createwithemail]
     
-
+   
+      
+     });
+ 
+   
+     document.getElementById('MPassword').value = "";
+     document.getElementById('MVerifyPassword').value= "";
+     return;
+    
+}
+function signup(){
   firebase.database().ref("MEMBER").push({
-  FullName:document.getElementById('MFullName').value,
+      FullName:document.getElementById('MFullName').value,
   Username:document.getElementById('MUsername').value,
   Email:document.getElementById('MEmail').value,
   VerifyEmail:document.getElementById('MVerifyEmail').value,
   Password:document.getElementById('MPassword').value,
   VerifyPassword:document.getElementById('MVerifyPassword').value,
   });
-}         
+  window.alert('congrats');
+}
+    // No user is signed in.
+  
+
+
+      // [END createwithemail]
+       
 </script>
 
 </body>

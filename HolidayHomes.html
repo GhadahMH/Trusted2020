@@ -8,9 +8,16 @@
       <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
 
       <style>
+    
+    th, td {
+             padding: 15px;
+               text-align: left;
+                }
+          tr:hover {background-color: #f5f5f5;}
         table {
+          border: 1px solid black;
           font-family: arial, sans-serif;
-          width: 100%;
+          width: 77%;
         }
         
         td, th {
@@ -117,6 +124,13 @@
       height: 41px;
       top: 273px;
     }
+    #holidayTable{
+      z-index: 40;
+      position: absolute;
+      top:30%;
+      left:5%;
+      font-size: 30px;
+    }
         </style>
 
     </head>
@@ -133,16 +147,36 @@
         </div>
       </nav>
 
-        <!-- Frame/Body-->
-      <div class="frame">
-        <svg width="2550" height="2200" class="gwd-svg-j0fp"> </svg>
- </script>
-       </div>
+              <!-- Frame/Body-->
+              <div class="frame">
+                <svg width="2550" height="2200" class="gwd-svg-j0fp">
+                  <rect x="0" y="200" rx="10" ry="10" width="2550" height="2000" style="fill: rgb(48, 0, 149); z-index: 10;"></rect>
+                  <rect x="21" y="240" rx="10" ry="10" width="2500" height="1900" style="fill: rgb(255,255,255); stroke-linecap: butt; z-index: 20;"></rect>
+                </svg>  
+                <!--Holiday Home boxes -->
+        
+              
+        <table id="holidayTable" >
+         <thead>
+           <td>Description</td>
+           <td>fdf</td>
+        </thead>
+        <tbody id="SSSSSH">
+          <td id="dec"></td>
+          <td id="name"></td>
+        </tbody>
+          
+        
+        </table>
+        
+              </div>
 
-  
+                
 <img src="assets/logo.png" class="webLogo">
 <input type="text" id="Search" class="searchBox" placeholder="Enter City">
-        <button id="button_1" class="searchBtn" onclick="search1()">Search</button>
+<button id="button_1" class="searchBtn" onclick="search()">Search</button>
+        
+
 
  <script>
    

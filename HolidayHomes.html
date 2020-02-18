@@ -161,15 +161,6 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 
-function search1(){
-  var Arr = [];
-  var rootRef = firebase.database().ref().child("Property");
-  rootRef.on("child_added", snap => {
-  var Description1=snap.child("Description").val();
-  var Price1=snap.child("Price").val();
-  var PropertyName1=snap.child("PropertyName").val();
-  var Type=snap.child("Type").val();
-    /*("10R").append();*/  });}
 </script>
 
 

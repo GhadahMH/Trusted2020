@@ -194,7 +194,15 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
+firebase.auth.Auth.Persistence.LOCAL;
 
+var cont = 0;
+ 
+ 
+
+
+ 
+ /*
 function search1(){
   var Arr = [];
   var rootRef = firebase.database().ref().child("Property");
@@ -203,7 +211,7 @@ function search1(){
   var Price1=snap.child("Price").val();
   var PropertyName1=snap.child("PropertyName").val();
   var Type=snap.child("Type").val();
-    /*("10R").append();*/  });}
+    /*("10R").append();  });} */ 
 </script>
 
 

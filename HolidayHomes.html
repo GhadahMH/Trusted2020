@@ -161,9 +161,11 @@
            <td>Description</td>
            <td>fdf</td>
         </thead>
-        <tbody id="SSSSSH">
+        <tbody id="table_body">
           <td id="dec"></td>
-          <td id="name"></td>
+          <td ></td>
+          <td  ></td>
+          <td ></td>
         </tbody>
           
         
@@ -174,9 +176,9 @@
                 
 <img src="assets/logo.png" class="webLogo">
 <input type="text" id="Search" class="searchBox" placeholder="Enter City">
-<button id="button_1" class="searchBtn" onclick="search()">Search</button>
+<button id="button_1" class="searchBtn" onclick="search1()">Search</button>
         
-
+<input class="width150" type="text" id="txtsearch"   />
 
  <script>
    
@@ -196,6 +198,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 firebase.auth.Auth.Persistence.LOCAL;
 
+<<<<<<< HEAD
 var cont = 0;
  
  
@@ -203,15 +206,37 @@ var cont = 0;
 
  
  /*
+=======
+
+>>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
 function search1(){
+  window.alert('hi');
   var Arr = [];
   var rootRef = firebase.database().ref().child("Property");
+<<<<<<< HEAD
   rootRef.on("child_added", snap => {
   var Description1=snap.child("Description").val();
   var Price1=snap.child("Price").val();
   var PropertyName1=snap.child("PropertyName").val();
   var Type=snap.child("Type").val();
     /*("10R").append();  });} */ 
+=======
+
+  rootRef.on('value', snapshot => {
+  snapshot.forEach(snap => {
+    const Description1=snap.child("Description").val();
+    const Price1=snap.child("Price").val();
+    const PropertyName1=snap.child("PropertyName").val();
+    const Type=snap.child("Type").val();
+    const City=snap.child("City").val();
+    var citys=document.getElementById('Search').value;
+if(City==citys){
+    $("#table_body").append("<tr><td>" + Description1 + "</td><td>" + Price1 + "</td><td>" + PropertyName1 + "</td><td>" + Type +"</td></tr>");}
+  });
+});
+
+    /*("10R").append();*/ }
+>>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
 </script>
 
 

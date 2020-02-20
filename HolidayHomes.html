@@ -178,7 +178,7 @@
 <input type="text" id="Search" class="searchBox" placeholder="Enter City">
 <button id="button_1" class="searchBtn" onclick="search1()">Search</button>
         
-<input class="width150" type="text" id="txtsearch"   />
+<input class="width150" type="text" id="txtsearch" />
 
  <script>
    
@@ -199,11 +199,7 @@ firebase.analytics();
 firebase.auth.Auth.Persistence.LOCAL;
 
 var cont = 0;
- 
- 
 
-
- 
  /*
 =======
 
@@ -223,21 +219,25 @@ function search1(){
   var Price1=snap.child("Price").val();
   var PropertyName1=snap.child("PropertyName").val();
   var Type=snap.child("Type").val();
+<<<<<<< HEAD
     /*("10R").append();  });} */
 
-  rootRef.on('value', snapshot => {
+    /*("10R").append();  });} */ 
+ rootRef.on('value', snapshot => {
   snapshot.forEach(snap => {
     const Description1=snap.child("Description").val();
     const Price1=snap.child("Price").val();
     const PropertyName1=snap.child("PropertyName").val();
     const Type=snap.child("Type").val();
     const City=snap.child("City").val();
+    const City2=snap.child("City").val();
     var citys=document.getElementById('Search').value;
+
 if(City==citys){
     $("#table_body").append("<tr><td>" + Description1 + "</td><td>" + Price1 + "</td><td>" + PropertyName1 + "</td><td>" + Type +"</td></tr>");}
   });
-});</script>
-
-
-    </body>
+  
+  });
+</script>
+</body>
 </html>

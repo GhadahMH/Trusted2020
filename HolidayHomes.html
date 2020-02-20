@@ -178,7 +178,7 @@
 <input type="text" id="Search" class="searchBox" placeholder="Enter City">
 <button id="button_1" class="searchBtn" onclick="search1()">Search</button>
         
-<input class="width150" type="text" id="txtsearch"   />
+<input class="width150" type="text" id="txtsearch" />
 
  <script>
    
@@ -224,10 +224,7 @@ function search1(){
   var PropertyName1=snap.child("PropertyName").val();
   var Type=snap.child("Type").val();
     /*("10R").append();  });} */ 
-=======
->>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
-
-  rootRef.on('value', snapshot => {
+ rootRef.on('value', snapshot => {
   snapshot.forEach(snap => {
     const Description1=snap.child("Description").val();
     const Price1=snap.child("Price").val();
@@ -241,13 +238,6 @@ if(City==citys){
   });
 });
 
-<<<<<<< HEAD
-
-=======
-    /*("10R").append();*/ }
->>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
 </script>
-
-
-    </body>
+</body>
 </html>

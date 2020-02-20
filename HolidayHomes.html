@@ -207,11 +207,16 @@ var cont = 0;
  /*
 =======
 
+<<<<<<< HEAD
+>>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
+=======
+
 >>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
 function search1(){
   window.alert('hi');
   var Arr = [];
   var rootRef = firebase.database().ref().child("Property");
+<<<<<<< HEAD
 <<<<<<< HEAD
   rootRef.on("child_added", snap => {
   var Description1=snap.child("Description").val();
@@ -219,6 +224,8 @@ function search1(){
   var PropertyName1=snap.child("PropertyName").val();
   var Type=snap.child("Type").val();
     /*("10R").append();  });} */ 
+=======
+>>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
 
   rootRef.on('value', snapshot => {
   snapshot.forEach(snap => {
@@ -233,7 +240,11 @@ if(City==citys){
   });
 });
 
+<<<<<<< HEAD
 
+=======
+    /*("10R").append();*/ }
+>>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
 </script>
 
 

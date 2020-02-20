@@ -223,9 +223,7 @@ function search1(){
   var Price1=snap.child("Price").val();
   var PropertyName1=snap.child("PropertyName").val();
   var Type=snap.child("Type").val();
-    /*("10R").append();  });} */ 
-=======
->>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
+    /*("10R").append();  });} */
 
   rootRef.on('value', snapshot => {
   snapshot.forEach(snap => {
@@ -238,14 +236,7 @@ function search1(){
 if(City==citys){
     $("#table_body").append("<tr><td>" + Description1 + "</td><td>" + Price1 + "</td><td>" + PropertyName1 + "</td><td>" + Type +"</td></tr>");}
   });
-});
-
-<<<<<<< HEAD
-
-=======
-    /*("10R").append();*/ }
->>>>>>> 7a8519f7dd1f1ddf4b23ca96ecda2af9df29c300
-</script>
+});</script>
 
 
     </body>

@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+  <title>Trusted Reviews</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://www.gstatic.com/firebasejs/5.5.6/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
+
+        <style type="text/css"> 
+          body{
+            
+          }
+          *{
+            margin: 0;
+            padding: 0;
+          }
+         .blueBoarder{
+           width: 98.7%;
+           min-height:100%;
+           border: 10px solid rgb(48, 0, 149);
+           border-radius: 15px ;
+           
+         }
+         .topFiveRow{
+           width: 96%;
+          text-align: center;
+           display: flex;
+           -ms-flex-wrap: wrap;
+           flex-wrap: wrap;
+           padding: 2%;
+         }
+         .sectionTitel{
+           background-color: rgb(48, 0, 149);
+           color: #fff;
+           text-align: center;
+           
+        }
+         .singleTopFive{
+           border: 2px solid #000;
+           width: 30%;
+           height: 50%;
+           margin: 3% auto;
+           display: block;
+           border-radius: 15px;
+           cursor: pointer; 
+         }
+         
+         .TopThreeRow{
+          width: 96%;
+          text-align: center;
+           display: flex;
+           -ms-flex-wrap: wrap;
+           flex-wrap: wrap;
+           padding: 2%;
+         }
+         .singelTopThree{
+          border: 2px solid #000;
+          width: 26%;
+          height: 50%;
+          margin: 3% auto;
+          display: block;
+          border-radius: 15px;
+          background-color: rgb(191,232,248);
+          padding: 2%;
+         }
+        .topThreeIntro{
+          text-align: center;
+          margin-top: 2%;
+        }
+        .TrustedRRow{
+          width: 96%;
+          text-align: center;
+           display: flex;
+           -ms-flex-wrap: wrap;
+           flex-wrap: wrap;
+           padding: 2% ;
+        }
+        .singleTrustedR{
+          border: 2px solid #000;
+          width: 41%;
+          min-height: 20%;
+          margin: 3% auto;
+          display: block;
+          border-radius: 15px;
+          padding: 2%;
+         
+        }
+        .homeImage{
+          width: 80%;
+          height: 30vh;
+          margin: 1% 0;
+        }
+        
+        .row1{
+          display: flex;
+          margin:2% 10%;
+        }
+        .row2{
+          display: flex;
+          margin-bottom: 15px;
+
+        }
+        .placeImage{
+          width: 25%;
+          height:25%;
+         margin-left: 30%;
+          
+        }
+        .row3{
+          display: flex;
+         
+        }
+        .ReviewerImg{
+          width: 25%;
+          height: 25%;
+
+        }
+        .RHead{
+          margin: 0 auto;
+          text-align: left;
+          margin-bottom:10%;
+        }
+        .Rfooter{
+          display: flex;
+        }
+        .blockchain{
+          display: flex;
+          margin-left:30%;
+        }
+        .row4{
+          display: flex;
+        }
+        .Tright{
+          margin: auto;
+        }
+        .header{
+          display: flex;
+          width: 100%;
+        }
+        .nav{
+          margin: auto 0;
+          margin-left: 50%;
+          display: flex;
+        }
+        .header a{
+          text-decoration: none;
+          display: block;
+          padding: 10px;
+          margin: 5px;
+          color:#000;
+        }
+        </style>
+    </head>
+    
+<body>
+
+  <div class="header">
+    <img src="logo.png" style="width: 100px;height:100px;margin:20px"/>
+    <div class="nav">
+      <a href="HomePage2.html">Home</a>
+      <a href="HolidayHomes.html">Holiday Homes</a>
+      <a href="POregisteration.html">Owner Register</a>
+      <a href="Memberregisteration.html">Member Register</a>
+      <a id="signin" href="Login.html">Sign In</a>
+      <a id="signout" href="#" onclick="logout()">Sign Out</a>
+    </div>
+    
+  </div>
+
+  <div class="blueBoarder">
+    <div class="search">
+
+    </div>
+    <div class="topFive">
+      <h1 class="sectionTitel">Top Five Holiday Homes</h1>
+      
+      <div id="topFiveRow" class="topFiveRow">
+      
+        
+      </div>
+    </div>
+
+    <div class="topThree">
+      <h1 class="sectionTitel"> Top Three Reviews</h1>
+      <h2 class="topThreeIntro" >The displayed reviews are based on highest rated reviews and Thiqah Credit.</h2>
+      <div id="TopThreeRow" class="TopThreeRow">
+
+        
+        
+          
+
+      </div>
+
+    </div>
+    <div class="TrustedR">
+      <h1 class="sectionTitel"> Trusted Reviews Features</h1> 
+      <div class="TrustedRRow">
+        <div class="singleTrustedR">
+          <div class="row4">
+            <img src="https://www.bitgild.com/wp-content/uploads/2020/01/1-oz-krugerrand-gold-coin-2020-1.png" style="width: 150px; height:150px; margin:auto"/>
+            <div class="Tright">
+              <h1 style="margin-bottom:5%;color:rgb(48, 0, 149)">Thiqa Credit Points</h1>
+              <h3 style="font-size: 23px;">Earn your Thiqa credite points by sharing your reviews with trusted reviews commyonity</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="singleTrustedR">
+          <div class="row4">
+            <img src="https://www.bitgild.com/wp-content/uploads/2020/01/1-oz-krugerrand-gold-coin-2020-1.png" style="width: 150px; height:150px; margin:auto"/>
+            <div class="Tright">
+              <h1 style="margin-bottom:5%;color:rgb(48, 0, 149)">Blockchain History</h1>
+              <h3 style="font-size: 23px;">To achieve transparency ,you can view our Blockchain at any given time</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="singleTrustedR">
+          <div class="row4">
+            <img src="https://www.bitgild.com/wp-content/uploads/2020/01/1-oz-krugerrand-gold-coin-2020-1.png" style="width: 150px; height:150px; margin:auto"/>
+            <div class="Tright">
+              <h1 style="margin-bottom:5%;color:rgb(48, 0, 149)">Trusted Reviews</h1>
+              <h3 style="font-size: 23px;">Through the deployment of blockchain technology on our reviewing system, we guarantee delivering to you trusted reviews</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="singleTrustedR">
+          <div class="row4">
+            
+            <div class="Tright">
+              <h1 style="margin-bottom:5%;color:rgb(48, 0, 149)">Find Highly Recommended Hotel</h1>
+              <h3 style="font-size: 23px;">With the availability of trusted reviews, you will be able to find a sutitable hotel for you</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <script>
+   
+     // Your web app's Firebase configuration
+var firebaseConfig = {
+  apiKey: "AIzaSyBVKHsqnVyaPbvPmgzPqEK_9p2Hm4ZucYc",
+  authDomain: "trusted2020-8c803.firebaseapp.com",
+  databaseURL: "https://trusted2020-8c803.firebaseio.com",
+  projectId: "trusted2020-8c803",
+  storageBucket: "trusted2020-8c803.appspot.com",
+  messagingSenderId: "662663714362",
+  appId: "1:662663714362:web:1842f051b9bddf5f48c703",
+  measurementId: "G-QDZ39S220R"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+var uu = sessionStorage.getItem('userId22');
+          
+if(uu!=null)
+{
+   document.getElementById('signin').style.display='none';
+   document.getElementById('signout').style.display='block';
+}else
+{
+  
+ document.getElementById('signin').style.display='block';
+ document.getElementById('signout').style.display='none';
+ 
+}
+//************ Top Five Home ***************
+var PIDList=[];
+var PIDListCopy=[];
+var PRateList=[];
+var PRateListCopy=[];
+var PReviewsCountList=[];
+var TopFive=[];
+var i0=0;
+var j0=0;
+var k=0;
+firebase.database().ref("Property").once('value').then(function (POwnerList0){
+  POwnerList0.forEach(function (Owner0){
+    
+    firebase.database().ref("Property").child(Owner0.key).once('value').then(function (PropertyList0){
+      i0++;
+      j0=0;
+      PropertyList0.forEach(function(Property0){
+        j0++;
+        PIDList.push( Property0.key);
+       
+        if(i0===POwnerList0.numChildren()&& j0===PropertyList0.numChildren())
+        {
+          for(var i1=0;i1<PIDList.length;i1++)
+          { PRateList.push(0);
+            PReviewsCountList.push(0);
+            firebase.database().ref("Reviews").orderByChild('PID').equalTo(PIDList[i1]).once('value').then(function (ReviewList0){
+              var rate=0;
+              var j1=0
+               
+              if(ReviewList0.val()!=null)
+              {
+                ReviewList0.forEach(function (Review0){
+                  rate+= parseInt(Review0.val().Rate);
+                  j1++;
+                  
+                  if(j1===ReviewList0.numChildren())
+                  {rate=rate/j1;
+                    PRateList[PIDList.indexOf(Review0.val().PID)]=rate;
+                    PReviewsCountList[PIDList.indexOf(Review0.val().PID)]=j1;
+                  }
+                });
+              }
+              k++; 
+              
+              if(k===PIDList.length)
+                {
+                  PIDListCopy=PIDList.slice();
+                  PRateListCopy=PRateList.slice();
+                  
+                  for(var k1=0;k1<5;k1++)
+                  {
+                    maxH=Math.max.apply(null,PRateList);
+                    TopFive.push(PIDList[PRateList.indexOf(maxH)]);
+                    
+                    PIDList.splice(PRateList.indexOf(maxH), 1);
+                    PRateList.splice(PRateList.indexOf(maxH), 1);
+                    //alert(PIDList[k1]+" : " +PRateList[k1]);
+                  }
+                   var c2=0
+                  for(var c1=0;c1<TopFive.length;c1++)
+                  {
+                    firebase.database().ref("Property").once('value').then(function(snapshot){
+                      snapshot.forEach(function (user){
+                        user.forEach(function (property){
+                          if(property.key===TopFive[c2])
+                          {
+                            
+                            c2++;
+                            document.getElementById('topFiveRow').innerHTML+=
+
+                            '<div class="singleTopFive" onClick="openProperty(\''+property.key+'\')">'+
+                              '<h3 style="margin-top: 10px;">'+property.val().PropertyName+'</h3>'+
+                              '<img src="'+property.val().Image+'" class="homeImage"/>'+
+                              '<div class="row1">'+
+                                '<div class="d">'+
+                                  '<div class="row2"><Span class=" fa fa-star " style="margin-right: 10px; color:gold"></Span><h3>'+PRateListCopy[PIDListCopy.indexOf(property.key)]+' Stars</h3>  </div>'+
+                                  '<div class="row2">'+
+                                  '<Span class="fa fa-clipboard" style="margin-right: 10px;display:flex"> <h3 style="margin-left: 10px;">'+PReviewsCountList[PIDListCopy.indexOf(property.key)]+' Reviws</h3> </Span>'+
+                                  '</div>'+
+                                '</div>'+
+                                '<img class="placeImage" src="https://images.vexels.com/media/users/3/129154/isolated/preview/a9b2c4b91e649bf6c2b7de555015d668-1st-place-laurel-medal-by-vexels.png" />'+
+                              '</div>'+
+                            '</div>';
+                          }
+                        });
+                      });
+                    });
+                  }
+                 
+                  
+                }
+              
+             
+              
+            });
+            
+          }
+        }
+      });
+    });
+
+  });
+
+});
+
+function openProperty(pkey){
+  window.location.href="SingleHolidayHome.html?p="+pkey;
+
+}
+
+
+
+
+
+
+
+//************ Top Three Review ***************
+var topThree= [];
+var idList = [];
+var scoreList = [];
+firebase.database().ref("Reviews").once('value').then(function (snapshot){
+  var rCount=snapshot.numChildren();
+  var j=0;
+  snapshot.forEach(function (review){
+    var rKey=review.key;
+    var rLike=review.val().Like;
+    var Lkeys = Object.keys(rLike);
+    var likeCount=Lkeys.length
+    var rDislike=review.val().Dislike;
+    var Dkeys = Object.keys(rDislike);
+    var dislikeCount=Dkeys.length;
+    var score=likeCount-dislikeCount;
+    idList.push(rKey);
+    scoreList.push(score);
+    j++
+    if(j===rCount)
+    {
+      for(var i=0;i<3&&i<=j;i++)
+      {
+        
+        var max=Math.max.apply(null,scoreList);
+        topThree.push(idList[scoreList.indexOf(max)]);
+       
+        idList.splice(scoreList.indexOf(max), 1);
+        scoreList.splice(scoreList.indexOf(max), 1);
+      }
+      for(var c=0;c<topThree.length;c++)
+      {
+        firebase.database().ref("Reviews").child(topThree[c]).once('value').then(function (R){
+         
+          firebase.database().ref("MEMBER").child(R.val().UID).once('value').then(function (M){
+
+            firebase.database().ref("Property").once('value').then(function (POwnerList){
+              POwnerList.forEach(function (pOwner){
+                firebase.database().ref("Property").child(pOwner.key).child(R.val().PID).once('value').then(function(P){
+                  
+                    if(P.val()!=null){
+                      document.getElementById('TopThreeRow').innerHTML+=
+
+                      '<div class="singelTopThree">'+
+                        '<div class="row3">'+
+                          '<img class="ReviewerImg" src="https://www.jumpstarttech.com/files/2018/08/Network-Profile.png"/>'+
+                          '<div class="RHead">'+
+                            '<h2 style="margin-bottom: 20px;">'+M.val().FullName+'</h2>'+
+                            '<h3>'+P.val().PropertyName+'</h3>'+
+                            '<h3>'+P.val().City+'</h3>'+
+                          '</div>'+
+                        '</div>'+
+                        '<P style="height: 180px;">'+R.val().Txt+'</P>'+
+                        '<div class="Rfooter">'+
+                          '<h3 style="margin: auto;">'+R.val().DateTime+'</h3>'+
+                          '<div class="blockchain">'+
+                            '<h3 style="margin: auto;">Blockchain</h3>'+
+                            '<img style="width: 50px;height:50px" src="https://cdn0.iconfinder.com/data/icons/basic-uses-symbol-vol-3/100/Security_Shield_Secure_Risk_True_Yes_Right-512.png">'+
+                          '</div>'+
+                        '</div>'+
+                      '</div>'
+                    }
+                });
+              });
+              
+              
+            
+
+            });
+          });
+        });
+      }
+      
+    }
+  });
+   
+    
+ 
+});
+
+
+function logout()
+         {
+          sessionStorage.removeItem('userId22');
+          window.location.href = "HomePage2.html"
+         }
+   </script>
+</body>
+</html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+
+  <meta charset="utf-8">
+  <title>Edit Your Property</title>
+  <meta name="generator" content="Google Web Designer 7.1.1.1210">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
+
+  <style type="text/css"> 
+
+    .container {
+      width: 50%;
+      max-width: 800px;
+    }
+    
+    #map {
+      height: 50vh;
+      margin-bottom: 10px;
+      display: none;
+    }
+    
+    #locationList .card {
+      padding: 10px;
+    }
+    
+    #toast-container {
+      top: 50%;
+      bottom: unset;
+    }
+    
+    .toast {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    
+    @media only screen and (max-width: 768px) {
+      .container {
+        width: 80%;
+      }
+    }
+    .main-header {
+      width: 100%;
+      border-bottom: 1px solid grey;
+      position: absolute;
+      top: 0;
+    }
+    .nav-wrapper{
+    
+      width: 100%;
+      border-bottom: 1px solid grey;
+      position: absolute;
+      top: 0;
+      background-color: #eaeaea;
+    }
+    
+    .nav-mobile{
+     width: 100%;
+      border-bottom: 1px solid grey;
+      position: absolute;
+      top: 0;
+      background-color: #eaeaea;
+    }
+    
+    
+
+      </style>
+  <style>
+    #map1{
+      position: absolute;
+      margin: 5%;
+      top: 1004px;
+      width: 40%;
+      height: 55%;
+      
+
+    }
+    #map{
+     display: block;
+      margin: 3% auto;
+      background-color: #000;
+      width: 40%;
+      height: 45vh;
+      
+
+    }
+    .header{
+      display: flex;
+      width: 100%;
+    }
+    .nav{
+      margin: auto 0;
+      margin-left: 50%;
+      display: flex;
+    }
+    .header a{
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      margin: 5px;
+      color:#000;
+    }
+    .blueBoarder{
+      width: 75.7%;
+      min-height:100%;
+      border: 10px solid rgb(48, 0, 149);
+      border-radius: 15px ;
+      padding: 2%;
+      text-align: center;
+      margin: 0 auto;
+
+    }
+  
+  </style>
+</head>
+
+<body class="htmlNoPages">
+ 
+
+  <div class="header">
+    <img src="logo.png" style="width: 100px;height:100px;margin:20px"/>
+    <div class="nav">
+      <a href="HomePage2.html">Home</a>
+      <a href="HolidayHomes.html">Holiday Homes</a>
+      <a href="POregisteration.html">Owner Register</a>
+      <a href="Memberregisteration.html">Member Register</a>
+      <a href="Login.html">Sign In</a>
+    </div>
+  </div>
+ 
+  <div class="blueBoarder">
+
+    <form id="shippingAddress"  enctype="multipart/form-data">
+      <div id="locationList"></div>
+      <br>
+      
+      <div class="input-field">
+        <input class="input_fields materialize-textarea" id="Name" type="text">
+        <label class="active" for="name"></label>
+      </div>
+      <div class="input-field">
+        <input class="input_fields" id="Des" type="text">
+        <label class="active" for="Description"></label>
+      </div>
+      <div class="input-field">
+        <input class="input_fields" id="Address" type="text">
+        <label class="active" for="address"></label>
+      </div>
+      <div class="input-field col s12">
+        <script>
+          
+        </script>
+        <select style="display: block;" id="Cities">
+          <option  value="ID30" disabled selected> City</option>
+          <option value="Dammam">Dammam</option>
+          <option value="Jeddah">Jeddah</option>
+          <option value="Makkah">Makkah</option>
+          <option value="Medina">Medina</option>
+          <option value="Riyadh">Riyadh</option>
+       
+
+        </select>
+      
+      </div>
+
+
+      <div class="input-field col s12">
+        <select style="display:block" id="Types">
+          <option value="ID20" disabled selected>Type</option>
+          <option value="Villa">Villa</option>
+          <option value="Flat">Flat</option>
+          <option value="Apartment">Apartment</option>
+          <option value="hotel">hotel</option>
+       
+        </select>
+       
+      </div>
+
+   
+      <div class="input-field">
+        <input class="input_fields" id="Price" type="number">
+        <label class="active" for="Price"></label>
+      </div>
+      <div class="input-field">
+        <input class="input_fields" id="OtherInformation" type="text">
+        <label class="active" for="OtherInformation"></label>
+      </div>
+   
+    
+  
+
+      <div class="file-field input-field">
+        <div class="btn"  style="color:#300095; background: #eaeaea" >
+          <span>File</span>
+          <scr id="Image"/>
+          <input  type="file" placeholder="Upload Image" id="Picture" accept="Picture/*"  >
+        </div>
+       
+    
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" placeholder="Upload image">
+        </div>
+    </div>
+    <div id="map"></div>
+    <button class="btn waves-effect waves-light"  style="color:#300095; background: #eaeaea"type="button" onclick="EditeProperty()"  id="Add" >Save</button>
+    
+  </form>
+
+   </div>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+   
+ <!-- <input type="text" id="Picture" class="gwd-input-1ndl"required/> -->
+ <script>
+  
+    var P_Type;
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBVKHsqnVyaPbvPmgzPqEK_9p2Hm4ZucYc",
+      authDomain: "trusted2020-8c803.firebaseapp.com",
+      databaseURL: "https://trusted2020-8c803.firebaseio.com",
+      projectId: "trusted2020-8c803",
+      storageBucket: "trusted2020-8c803.appspot.com",
+      messagingSenderId: "662663714362",
+      appId: "1:662663714362:web:1842f051b9bddf5f48c703",
+      measurementId: "G-QDZ39S220R"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var uu = sessionStorage.getItem('userId22');
+    
+    var url_string = window.location.href; //window.location.href
+    
+    var url = new URL(url_string);
+    var PID = url.searchParams.get("c");
+    var P_Image;
+    var P_location;
+    var P_marker;
+    firebase.database().ref("Property").child(uu).child(PID).once("value").then(function (snapshot){
+      P_Address=snapshot.val().Address;
+      P_City=snapshot.val().City;
+      P_Discreption=snapshot.val().Description;
+      P_Image=snapshot.val().Image;
+      P_OtherInfo=snapshot.val().OtherInformation;
+      P_Price=snapshot.val().Price;
+      P_Name=snapshot.val().PropertyName;
+      P_Type=snapshot.val().Type;
+      P_location=snapshot.val().Location;
+      P_marker = new google.maps.Marker({
+        position: P_location,
+        map:map
+      });
+      map.setCenter(P_location);
+      map.setZoom(19);
+     
+      
+      document.getElementById("Name").value=P_Name;
+      document.getElementById("Des").value=P_Discreption;
+      document.getElementById("Address").value=P_Address;
+
+      document.getElementById("Price").value=P_Price;
+      document.getElementById("OtherInformation").value=P_OtherInfo;
+      document.getElementById("Image").src=P_Image;
+      var e = document.getElementById("Types");
+      var e2 = document.getElementById("Cities");
+      selectOption(e, P_Type);
+      selectOption(e2, P_City);
+
+    });
+  	function selectOption(sel, val) {
+    var opt; 
+
+    // loop through options in select list
+    for ( var i = 0, len = sel.options.length; i < len; i++ ) {
+        opt = sel.options[i]; //
+
+        if ( opt.value === val ) {
+            opt.selected = true;
+            break;
+        }
+    }
+}
+
+
+
+   function EditeProperty() {
+   
+      var PropertN = document.getElementById("Name").value;
+      var DescriptionN = document.getElementById("Des").value;
+      var AddressN = document.getElementById("Address").value;
+      var PriceN = document.getElementById("Price").value;
+      var OtherInformationN = document.getElementById("OtherInformation").value;
+
+      var e3 = document.getElementById("Types");
+        var resultType = e3.options[e3.selectedIndex].text;
+
+  var e4 = document.getElementById("Cities");
+				var resultCity = e4.options[e4.selectedIndex].text;
+
+    if (PropertN === "") {
+      window.alert('The Name of Property is Required!');
+      return;
+   } 
+
+    if (DescriptionN === "") {
+      window.alert('The Description of Property is Required!');
+      return;
+    }
+
+    if (AddressN === "") {
+      window.alert('The Address of Property is Required!');
+      return;
+    }
+
+    if (resultCity  === "City") {
+      window.alert('The City of Property is Required!');
+      return;
+    }
+
+    if (resultType  === "Property Type") {
+      window.alert('The Type of Property is Required!');
+      return;
+    }
+
+    /*if (Picture === "") {
+      window.alert('The Price of Property is Required!');
+      return;
+    }*/
+
+    if(document.getElementById("Picture").files.length !=0)
+    {
+      var Picture = document.getElementById("Picture").files[0];
+      
+      var PictureName = Picture.name;
+      var storageRef = firebase.storage().ref('images/' + PictureName);
+      var uploadTask = storageRef.put(Picture);
+      var downURL;
+      uploadTask.on('state_changed', function(snapshot) {
+  
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log("upload is " + progress + "done")
+  
+      },function(error) {
+        //here error
+        console.log(error.message);
+  
+      }, function() {
+        //here successful
+        uploadTask.snapshot.ref.getDownloadURL().then(function(downlaodURL) {
+          // get upload pic here
+          downURL=downlaodURL;
+          console.log(downlaodURL);
+  
+          //var uu = sessionStorage.getItem('userId22');
+          // window.alert(PropertyName);
+     firebase.database().ref('Property').child(uu).child(PID).set({
+      
+        OwnerID:uu,
+       PropertyName: PropertN,
+       Description: DescriptionN,
+       Address: AddressN,
+       City:resultCity ,
+       Type: resultType,
+       Price: PriceN,
+       OtherInformation: OtherInformationN,
+       Image:downURL,
+       Location:P_location
+
+     }).then(function(){
+       alert('Edited Successfully');
+       location.reload();
+       return false;
+
+     });
+          
+        });
+        
+  
+   
+      });
+      
+    }else
+    {
+      firebase.database().ref('Property').child(uu).child(PID).set({
+      
+        OwnerID:uu,
+       PropertyName: PropertN,
+       Description: DescriptionN,
+       Address: AddressN,
+       City: resultCity,
+       Type: resultType,
+       Price: PriceN,
+       OtherInformation: OtherInformationN,
+       Image:P_Image,
+       Location:P_location
+     }).then(function(){
+      alert('Edited Successfully');
+      location.reload();
+      return false;
+
+    });
+    }
+  
+
+
+
+
+   
+
+
+    
+}
+
+    /*firebase.database().ref("PropertyOwner./Property").push({
+
+      PropertyName: PropertN,
+      Description: DescriptionN,
+      Address: AddressN,
+      City: CityN,
+      Type: TypeN,
+      Price: PriceN,
+      OtherInformation: OtherInformationN,
+      Picture: PictureN,
+
+
+    });
+
+    window.alert("You Property is 2 add!");*/
+
+   
+
+  </script>
+  <script>
+    //map
+    var map;
+    
+    function initMap(){
+     var defultLocation ={lat:24.689524,lng:46.605114}
+       map = new google.maps.Map(document.getElementById("map"),
+      {
+        zoom: 6,
+        center: defultLocation
+      });
+      var marker = new google.maps.Marker();
+      google.maps.event.addListener(map,'click',function (event){
+          P_location={lat:event.latLng.lat(),lng:event.latLng.lng()};
+          P_marker.setMap(null);
+          marker.setMap(null);
+          marker = new google.maps.Marker({
+          position: P_location,
+          map:map
+        });
+        
+
+      });
+     /* var marker = new google.maps.Marker({
+        position: location,
+        map:map
+      });
+      marker.setMap(null);*/
+    }
+
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gxhzHM47hLo88E5MGOM5NufJkigYlNY&callback=initMap"
+  type="text/javascript"></script>
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
+  <style>
+   *{
+     margin: 0;
+     padding: 0;
+   }
+   .blueBoarder{
+     width: 94.7%;
+     min-height:100%;
+     border: 10px solid rgb(48, 0, 149);
+     border-radius: 15px ;
+     padding: 2%;
+   }
+   .blueBoarderInside{
+     width: 100%;
+     text-align: center;
+   }
+   .row1{
+     display: flex;
+     width: 100%;
+     margin: 0 auto;
+     margin-top: 10%;
+   }
+   .row2{
+    display: flex;
+    width: 100%;
+    margin: 1% auto;
+    
+  }
+  .row3{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .row4{
+    display: flex;
+    width: 100%;
+    margin: 0 auto;
+  }
+   .col1{
+    width: 55%;
+    margin: 0 auto;
+   }
+   .col2{
+    width:33%;
+    margin: 0 auto;
+    margin-top: 15%;
+   }
+   .property{
+     margin: 0 auto;
+     border: 3px solid #000;
+     border-radius: 15px ;
+     padding: 2% 1%;
+     text-align: center;
+     width: 97%;
+     margin-bottom: 2%;
+   }
+   .vertical_div{
+    width: 30%;
+    margin: auto 1%;
+  }
+  .marginAuto{
+    margin: auto;
+  }
+  button{
+    box-shadow: 0px;
+    font-size: 30px;
+    background-color: rgb(217,199,241);
+    border-radius: 10px;
+    border: none;
+    margin: auto ;
+    padding: 10px;
+    height: 1%;
+  }
+  .p-lite{
+    font-size: 27px;
+    color: #8c8c8c;
+  }
+  P{
+    font-size: 27px;
+
+  }
+  .singelReview{
+    margin: 0 auto;
+    border: 3px solid #000;
+    border-radius: 15px ;
+    padding: 3%;
+    text-align: center;
+    width: 40%;
+    margin-bottom: 2%;
+    text-align: left;
+  }
+  .overView{
+    margin:  auto;
+    border: 3px solid #000;
+    border-radius: 15px ;
+    padding: 3%;
+    text-align: center;
+    width: 90%;
+    
+    text-align: left;
+  }
+  .txtarea{
+    margin: 0 auto;
+    width: 96%;
+    height: 250px;
+    margin-top: 2%;
+    background-color: #e6e6e6;
+    border-radius: 15px ;
+    padding: 2%;
+    font-size: 20px;    
+  }
+  
+  .checked{
+    color: orange;
+    
+  }
+  .header{
+    display: flex;
+    width: 100%;
+  }
+  .nav{
+    margin: auto 0;
+    margin-left: 50%;
+    display: flex;
+  }
+  .header a{
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    color:#000;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="logo.png" style="width: 100px;height:100px;margin:20px"/>
+    <div class="nav">
+      <a href="HomePage2.html">Home</a>
+      <a href="HolidayHomes.html">Holiday Homes</a>
+      <a href="POregisteration.html">Owner Register</a>
+      <a href="Memberregisteration.html">Member Register</a>
+      <a id="signin" href="Login.html">Sign In</a>
+      <a id="signout" href="#" onclick="logout()">Sign Out</a> 
+    </div> 
+  <div class="blueBoarder">
+    <div class="blueBoarderInside">
+            <h1>How was your experience?</h1>
+            <div class="singelReview">
+                <div class="row2">
+                  <P style="margin-right: 2%;">Rate</P> 
+                  <span class=" fa fa-star "  onclick="starmark(this)" id="1one" style="font-size: 30px;cursor:pointer" ></span>
+                  <span class=" fa fa-star "  onclick="starmark(this)" id="2one" style="font-size: 30px;cursor:pointer" ></span>
+                  <span class=" fa fa-star "  onclick="starmark(this)" id="3one" style="font-size: 30px;cursor:pointer" ></span>
+                  <span class=" fa fa-star "  onclick="starmark(this)" id="4one" style="font-size: 30px;cursor:pointer" ></span>
+                  <span class=" fa fa-star "  onclick="starmark(this)" id="5one" style="font-size: 30px;cursor:pointer" ></span>
+                </div>
+                <P>Review</P>
+                <textarea id="RText" class="txtarea"></textarea>
+            </div>
+            <button onclick="addReview()">Submit</button>
+    </div>
+  </div>
+  
+</body>
+<script type="text/javascript">
+  var rating=0;
+  function starmark(item)
+  {
+    var count=item.id[0];
+    rating=count;
+    var subid=item.id.substring(1);
+    for(var i=0;i<5;i++)
+    {
+      if(i<count)
+      {
+        document.getElementById((i+1)+subid).style.color="orange";
+      }else
+      {
+        document.getElementById((i+1)+subid).style.color="black"
+      }
+    }
+  }
+</script>
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyBVKHsqnVyaPbvPmgzPqEK_9p2Hm4ZucYc",
+    authDomain: "trusted2020-8c803.firebaseapp.com",
+    databaseURL: "https://trusted2020-8c803.firebaseio.com",
+    projectId: "trusted2020-8c803",
+    storageBucket: "trusted2020-8c803.appspot.com",
+    messagingSenderId: "662663714362",
+    appId: "1:662663714362:web:1842f051b9bddf5f48c703",
+    measurementId: "G-QDZ39S220R"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var uu = sessionStorage.getItem('userId22');
+          
+  if(uu!=null)
+  {
+     document.getElementById('signin').style.display='none';
+     document.getElementById('signout').style.display='block';
+  }else
+  {
+    
+   document.getElementById('signin').style.display='block';
+   document.getElementById('signout').style.display='none';
+   window.location.href = "Login.html"
+  }
+ function addReview(){
+  var url_string = window.location.href; //window.location.href
+  var url = new URL(url_string);
+  var PID1 = url.searchParams.get("p");
+  
+  if(PID1!=null){
+    var userid=uu;
+  var rate=rating
+  var ReviewText=document.getElementById('RText').value;
+
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
+  var RDateTime= dateTime;
+  firebase.database().ref("Reviews").push().set({
+    DateTime:RDateTime,
+    PID:PID1,
+    Txt:ReviewText,
+    UID:userid,
+    Rate:rate,
+    Like:{'defult':0},
+    Dislike:{'defult':0},
+  }).then(function (){
+    alert("Review added successfully");
+  });
+  }else{
+    alert("Error");
+  }
+ 
+  
+ }
+
+ function logout()
+         {
+          sessionStorage.removeItem('userId22');
+          window.location.href = "HomePage2.html"
+         }
+ 
+</script>
+</html>

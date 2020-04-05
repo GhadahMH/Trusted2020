@@ -259,7 +259,7 @@
               ReviewLike=likesnapshot.numChildren()-1;
               ReviewDislike=dlikesnapshot.numChildren()-1;
               document.getElementById('reviewList').innerHTML+=
-                '<div class="singelReview" onClick="goToReview(\''+Review.key+'\')" >'+
+                '<div class="singelReview"  >'+
                 '<div class="row3">'+
                 '<img src="'+ReviewerImage+'" width="100" height="100"/>'+
                 '<div style="margin-left: 3%;margin-bottom: 3%;">'+
@@ -271,9 +271,9 @@
                 ' </div>'+
                 ' <p>'+ReviewTxt+'</p>'+
                 ' <div class="row5">'+
-                '<span  class="icon fa fa-thumbs-up"></span>'+
+                '<span onclick="addLike(\''+Review.key+'\')" class="icon fa fa-thumbs-up"></span>'+
                 '<p id="likeCount" class="marginAuto">'+ReviewLike+'</p>'+
-                '<span  class="icon fa fa-thumbs-down"></span>'+
+                '<span onclick="addDislike(\''+Review.key+'\')" class="icon fa fa-thumbs-down"></span>'+
                 ' <p id="dislikeCount" class="marginAuto">'+ReviewDislike+'</p>'+
                 '  </div>'+
                 ' </div>';
@@ -305,25 +305,33 @@
     window.location ="Login.html";
   }else
   {
-    firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).once('value').then(function (RDLsnap){
-      isthereDislike=RDLsnap.val();
-      if(isthereDislike!=null)
+    firebase.database().ref("Reviews").child(RID).child('UID').once('value').then(function (uidsnap){
+      if(uu!=uidsnap.val())
       {
-        firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).remove();
-      }
-    });
-    firebase.database().ref("Reviews").child(RID).child('Like').child(uu).once('value').then(function (RLsnap){
-     var isthereLike= RLsnap.val();
-      if(isthereLike===null)
-      {
-        firebase.database().ref("Reviews").child(RID).child('Like').child(uu).set(1);
-        location.reload();
+        firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).once('value').then(function (RDLsnap){
+          isthereDislike=RDLsnap.val();
+          if(isthereDislike!=null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).remove();
+          }
+        });
+        firebase.database().ref("Reviews").child(RID).child('Like').child(uu).once('value').then(function (RLsnap){
+         var isthereLike= RLsnap.val();
+          if(isthereLike===null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Like').child(uu).set(1);
+            location.reload();
+          }else
+          {
+            alert("You liked this Review already !");
+          }
+        });
       }else
       {
-        alert("You liked this Review already !")
+        alert("Can't  Like your self !");
       }
     });
-
+    
   }
 }
 function addDislike(RID)
@@ -335,24 +343,35 @@ function addDislike(RID)
   }
   else
   {
-    firebase.database().ref("Reviews").child(RID).child('Like').child(uu).once('value').then(function (RLsnap){
-      isthereLike=RLsnap.val();
-      if(isthereLike!=null)
+    firebase.database().ref("Reviews").child(RID).child('UID').once('value').then(function (uidsnap){
+      
+      if(uu!=uidsnap.val())
       {
-        firebase.database().ref("Reviews").child(RID).child('Like').child(uu).remove();
-      }
-    });
-    firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).once('value').then(function (RDLsnap){
-     var isthereDislike= RDLsnap.val();
-      if(isthereDislike===null)
-      {
-        firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).set(1);
-        location.reload();
+        firebase.database().ref("Reviews").child(RID).child('Like').child(uu).once('value').then(function (RLsnap){
+          isthereLike=RLsnap.val();
+          
+          if(isthereLike!=null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Like').child(uu).remove();
+          }
+        });
+        firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).once('value').then(function (RDLsnap){
+         var isthereDislike= RDLsnap.val();
+          if(isthereDislike===null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).set(1);
+            location.reload();
+          }else
+          {
+            alert("You disliked this Review already !")
+          }
+        });
       }else
       {
-        alert("You disliked this Review already !")
+        alert("Can't  Dislike your self !")
       }
     });
+    
   }
 }
 

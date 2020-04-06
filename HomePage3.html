@@ -467,7 +467,6 @@ function Login(){
 
     //window.alert("Helooooo");
 
-
       var email = document.getElementById('LEmail').value;
         var password = document.getElementById('LPassword').value;
        if (email.length < 4) {
@@ -478,53 +477,30 @@ function Login(){
         window.alert('Please enter a password.');
         return;
       }
-
-//if(email != "" || password != "" )
-//{
     var result = firebase.auth().signInWithEmailAndPassword(email , password);
     result.then( function(user){
       var currentUser = firebase.auth().currentUser
-      window.alert("Welcom Back: "+currentUser.email);
+      window.alert("Welcome Back: "+currentUser.email);
      // writeCookie('user',currentUser,7);
      sessionStorage.setItem('userId22',currentUser.uid);
-     if(currentUser.uid != null)
-{
+     if(currentUser.uid != null){
   
   firebase.database().ref('MEMBER').child(currentUser.uid).once('value').then(function(snapshot) {
     var userinfo = snapshot.val(); 
     var isOwner=userinfo['PropertyOwner'];
-
    
   if(isOwner){
     window.location.href = "sh2Dashboard.html";
-    
-  }
-  else
-  {
+    }
+  else {
     window.location.href = "MemberDashboard.html";
   }
-    
-   })
-   
-  
- 
-
-}
-      
-    auth = user;
+   })}    
   })
   .catch(function(error){
-    alert("Login Failed!", error);
+    alert("Something went wrong, please try again.", error);
   });
-//}
-//else 
-//{
- //  window.alert("Please fill out all fields");
-//}
-
-
 }
-
 function writeCookie(name,value,days) {
   var date, expires;
   if (days) {
@@ -536,7 +512,6 @@ function writeCookie(name,value,days) {
   }
   document.cookie = name + "=" + value + expires + "; path=/";
 }
-
 </script>
 
 

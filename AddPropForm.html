@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Your Property</title>
+  <link rel="stylesheet" type="text/css" href="homePage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.8.0/firebase-storage.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <style type="text/css"> 
+
+.container {
+  width: 50%;
+  max-width: 800px;
+}
+
+#map {
+  height: 50vh;
+  margin-bottom: 10px;
+  display: none;
+}
+
+#locationList .card {
+  padding: 10px;
+}
+
+#toast-container {
+  top: 50%;
+  bottom: unset;
+}
+
+.toast {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 80%;
+  }
+}
+.main-header {
+  width: 100%;
+  border-bottom: 1px solid grey;
+  position: absolute;
+  top: 0;
+}
+.nav-wrapper{
+
+  width: 100%;
+  border-bottom: 1px solid grey;
+  position: absolute;
+  top: 0;
+  background-color: #eaeaea;
+}
+
+.nav-mobile{
+ width: 100%;
+  border-bottom: 1px solid grey;
+  position: absolute;
+  top: 0;
+  background-color: #eaeaea;
+}
+
+
+
+
+  </style>
+
+
+
+</head>
+<body>
+  <header class="main-header">
+    
+<nav>
+    <div class="nav-wrapper ">
+      <img src="OverProject.png" class="webLogo">
+      
+    <div class="main-nav">
+      <ul id="nav-mobile" >
+          <li id="navPropertyOwner" style="display: none;"><a href="propertyOwnerDashboard.html"> Manage Properties</a></li>
+            <li><a href="HolidayHomes.html" style="color: grey"> Holiday Homes</a></li>
+            <li><a href="Login.html" style="color: grey">Sign In</a></li>
+            <li><a  href="MemberDashboard.html" style="color: grey"> profile</a></li>
+
+      </ul>
+    </div>
+    </div>
+  </nav>
+
+  <div class="account">
+      <a href="#" class="btn btn-secondary">LogOut</a>
+    </div>
+   
+</header>
+<!-- <header class="main-header">
+         <div class="container">
+       <img src="logo.png" class="webLogo">
+
+         <nav class="main-nav">
+         <ul>
+            <li id="navPropertyOwner" style="display: none;"><a href="propertyOwnerDashboard.html"> Maneg Properties</a></li>
+            <li><a href="HolidayHomes.html"> Holiday Homes</a></li>
+            <li><a href="Login.html">Sign In</a></li>
+            <li><a  href="MemberDashboard.html"> profile</a></li>
+            <li><a  href="Memberregisteration.html"> register</a></li>
+         </ul>
+    </nav>
+    <div class="account">
+      <a href="#" class="btn btn-secondary">Log in</a>
+      <a href="#" class="btn">Sign Up</a>
+    </div>
+  </div>
+</header> -->
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <!-- <script src="js/main.js"></script> -->
+  <div class="container">
+    
+   <h3>Add your property</h3>
+
+   <p>You can click the button below to use your current location as your shipping address</p>
+    <div id="map">
+    </div>
+    <button id="showMe" class="btn"  style="color:#300095; background: #eaeaea"> <i class="material-icons">add_location</i> Use My Location </button>
+    <form id="shippingAddress">
+      <div id="locationList"></div>
+      <br>
+      <div class="input-field">
+        <textarea class="input_fields materialize-textarea" id="Name" type="text"></textarea>
+        <label class="active" for="name">Property name</label>
+      </div>
+      <div class="input-field">
+        <input class="input_fields" id="Des" type="text">
+        <label class="active" for="Description">Description</label>
+      </div>
+      <div class="input-field">
+        <input class="input_fields" id="Address" type="text">
+        <label class="active" for="address">Address</label>
+      </div>
+      
+     <div class="input-field col s12">
+    <select>
+      <option value=""  id="City"disabled selected >City</option>
+      <option value="Riyadh">Riyadh</option>
+      <option value="Jeddah">Jeddah</option>
+      <option value="Dammam">Dammam</option>
+    </select>
+    <!-- <label>City</label> -->
+  </div>
+   <div class="input-field col s12">
+    <select>
+      <option value=""  id="Type"disabled selected >Property Type</option>
+      <option value="Riyadh">Villa</option>
+      <option value="Jeddah">Flat</option>
+      <option value="Dammam">Apartment</option>
+    </select>
+    <!-- <label>City</label> -->
+  </div>
+      <div class="input-field">
+        <input class="input_fields" id="Price" type="number">
+        <label class="active" for="Price">Price</label>
+      </div>
+   
+    <form enctype="multipart/form-data">
+    <div class="file-field input-field">
+      <div class="btn"  style="color:#300095; background: #eaeaea" onclick="addProperty()">
+        <span>File</span>
+        <input type="file" id="Picture" accept="Picture/*">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+  </form>
+
+  <button class="btn waves-effect waves-light"  style="color:#300095; background: #eaeaea"type="button" onclick="addProperty()"  id="Add" >Add</button>
+  
+    </form>
+   
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6gxhzHM47hLo88E5MGOM5NufJkigYlNY"></script>
+</body>
+
+<script>
+
+//This div will display Google map
+const mapArea = document.getElementById('map');
+
+//This button will set everything into motion when clicked
+const actionBtn = document.getElementById('showMe');
+
+//This will display all the available addresses returned by Google's Geocode Api
+const locationsAvailable = document.getElementById('locationList');
+
+//Let's bring in our API_KEY
+const __KEY = 'AIzaSyC6gxhzHM47hLo88E5MGOM5NufJkigYlNY';
+
+//Let's declare our Gmap and Gmarker variables that will hold the Map and Marker Objects later on
+let Gmap;
+let Gmarker;
+
+//Now we listen for a click event on our button
+actionBtn.addEventListener('click', e => {
+  // hide the button 
+  actionBtn.style.display = "none";
+  // call Materialize toast to update user 
+  M.toast({ html: 'fetching your current location', classes: 'rounded' });
+  // get the user's position
+  getLocation();
+});
+
+getLocation = () => {
+  // check if user's browser supports Navigator.geolocation
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(displayLocation, showError, options);
+  } else {
+    M.toast({ html: "Sorry, your browser does not support this feature... Please Update your Browser to enjoy it", classes: "rounded" });
+  }
+}
+showError = (error) => {
+  mapArea.style.display = "block"
+  switch (error.code) {
+    case error.PERMISSION_DENIED:
+      mapArea.innerHTML = "You denied the request for your location."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      mapArea.innerHTML = "Your Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      mapArea.innerHTML = "Your request timed out. Please try again"
+      break;
+    case error.UNKNOWN_ERROR:
+      mapArea.innerHTML = "An unknown error occurred please try again after some time."
+      break;
+  }
+}
+//Makes sure location accuracy is high
+const options = {
+  enableHighAccuracy: true
+}
+
+
+displayLocation = (position) => {
+  const lat = position.coords.latitude;
+  const lng = position.coords.longitude;
+  const latlng = { lat, lng }
+  showMap(latlng);
+  createMarker(latlng);
+  mapArea.style.display = "block";
+}
+
+showMap = (latlng) => {
+  let mapOptions = {
+    center: latlng,
+    zoom: 17
+  };
+  Gmap = new google.maps.Map(mapArea, mapOptions);
+}
+
+createMarker = (latlng) => {
+  let markerOptions = {
+    position: latlng,
+    map: Gmap,
+    animation: google.maps.Animation.BOUNCE,
+    clickable: true
+  };
+  Gmarker = new google.maps.Marker(markerOptions);
+}
+
+getGeolocation = (lat, lng) => {
+  const latlng = lat + "," + lng;
+  fetch( `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latlng}&key=${__KEY}` )
+    .then(res => res.json())
+    .then(data => console.log(data.results));
+}
+
+displayLocation = (position) => {
+  const lat = position.coords.latitude;
+  const lng = position.coords.longitude;
+  const latlng = { lat, lng }
+  showMap(latlng);
+  createMarker(latlng);
+  mapArea.style.display = "block";
+  getGeolocation(lat, lng)// our new function call
+}
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyBVKHsqnVyaPbvPmgzPqEK_9p2Hm4ZucYc",
+      authDomain: "trusted2020-8c803.firebaseapp.com",
+      databaseURL: "https://trusted2020-8c803.firebaseio.com",
+      projectId: "trusted2020-8c803",
+      storageBucket: "trusted2020-8c803.appspot.com",
+      messagingSenderId: "662663714362",
+      appId: "1:662663714362:web:1842f051b9bddf5f48c703",
+      measurementId: "G-QDZ39S220R"
+    };
+    
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var uu = sessionStorage.getItem('userId22');
+    
+    
+
+   function addProperty() {
+     
+    if(document.getElementById("Picture").files.length !=0)
+    {
+      var PropertN = document.getElementById("Name").value;
+      var DescriptionN = document.getElementById("Des").value;
+      var AddressN = document.getElementById("Address").value;
+      var CityN = document.getElementById("City").value;
+      var TypeN = document.getElementById("Type").value;
+      var PriceN = document.getElementById("Price").value;
+     // var OtherInformationN = document.getElementById("OtherInformation").value;
+
+
+    if (PropertN === "") {
+      window.alert('The Name of Property is Required!');
+      return;
+   } 
+
+    if (DescriptionN === "") {
+      window.alert('The Description of Property is Required!');
+      return;
+    }
+
+    if (AddressN === "") {
+      window.alert('The Address of Property is Required!');
+      return;
+    }
+
+    if (CityN  === "") {
+      window.alert('The City of Property is Required!');
+      return;
+    }
+
+    if (TypeN  === "") {
+      window.alert('The Type of Property is Required!');
+      return;
+    }
+
+    /*if (Picture === "") {
+      window.alert('The Price of Property is Required!');
+      return;
+    }*/
+
+    var Picture = document.getElementById("Picture").files[0];
+      
+    var PictureName = Picture.name;
+    var storageRef = firebase.storage().ref('images/' + PictureName);
+    var uploadTask = storageRef.put(Picture);
+    var downURL;
+    uploadTask.on('state_changed', function(snapshot) {
+
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log("upload is " + progress + "done")
+
+    },function(error) {
+      //here error
+      console.log(error.message);
+
+    }, function() {
+      //here successful
+      uploadTask.snapshot.ref.getDownloadURL().then(function(downlaodURL) {
+        // get upload pic here
+        downURL=downlaodURL;
+        console.log(downlaodURL);
+
+        var uu = sessionStorage.getItem('userId22');
+        // window.alert(PropertyName);
+   firebase.database().ref('Property').child(uu).push().set({
+    
+      OwnerID:uu,
+     PropertyName: PropertN,
+     Description: DescriptionN,
+     Address: AddressN,
+     City: CityN,
+     Type: TypeN,
+     Price: PriceN,
+     OtherInformation: OtherInformationN,
+     Image:downURL,
+     Location:Plocation
+   }).then(function (){
+        alert("Property added successfully");
+      });
+        
+      });
+      
+
+ 
+    });
+
+    }else
+    {
+      alert("choose Image file");
+    }    
+}
+
+ document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+
+  // Or with jQuery
+
+
+ </script>
+</html>

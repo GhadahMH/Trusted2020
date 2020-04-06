@@ -43,6 +43,14 @@
     width: 100%;
     margin: 0 auto;
   }
+<<<<<<< HEAD
+=======
+  .row5{
+    display: flex;
+    width: 50%;
+    margin: 0 auto;
+  }
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
    .col1{
     width: 55%;
     margin: 0 auto;
@@ -112,11 +120,46 @@
     color:rgb(217,199,241);
     cursor:pointer;
   }
+<<<<<<< HEAD
+=======
+  .header{
+    display: flex;
+    width: 100%;
+  }
+  .nav{
+    margin: auto 0;
+    margin-left: 50%;
+    display: flex;
+  }
+  .header a{
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    margin: 5px;
+    color:#000;
+  }
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
   
   </style>
 </head>
 
 <body>
+<<<<<<< HEAD
+=======
+  <div class="header">
+    <img src="logo.png" style="width: 100px;height:100px;margin:20px"/>
+    <div class="nav">
+      <a href="HomePage2.html">Home</a>
+      <a href="HolidayHomes.html">Holiday Homes</a>
+      <a href="POregisteration.html">Owner Register</a>
+      <a href="Memberregisteration.html">Member Register</a>
+      <a id="signin" href="Login.html">Sign In</a>
+        <a id="signout" href="#" onclick="logout()">Sign Out</a>
+    </div>
+    
+  </div>
+
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
   <div class="blueBoarder">
     <div class="blueBoarderInside">
       <div class="row1">
@@ -141,6 +184,13 @@
           <div class="overView">
             <h1>OverView</h4>
             <p id="PDec"></p>
+<<<<<<< HEAD
+=======
+            <h1>Location</h4>
+             <div id="location">
+              
+             </div>  
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
             <h1>Social Media</h4>
             <div class="row4">
               <span class="fa fa-facebook icon" onclick="SClick('http://fb.com')"></span>
@@ -171,6 +221,22 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+<<<<<<< HEAD
+=======
+    var uu = sessionStorage.getItem('userId22');
+          
+    if(uu!=null)
+    {
+       document.getElementById('signin').style.display='none';
+       document.getElementById('signout').style.display='block';
+    }else
+    {
+      
+     document.getElementById('signin').style.display='block';
+     document.getElementById('signout').style.display='none';
+     
+    }
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
     var url_string = window.location.href; //window.location.href
     var url = new URL(url_string);
     var PID = url.searchParams.get("p");
@@ -179,11 +245,20 @@
         user.forEach(function (property){
           if(property.key===PID)
           {
+<<<<<<< HEAD
             
             document.getElementById('pName').innerText=property.val().PropertyName;
             document.getElementById('PImg').src=property.val().Image;
             document.getElementById('PDec').innerText=property.val().Description;
             
+=======
+            property.val().Location['lat']
+            document.getElementById('pName').innerText=property.val().PropertyName;
+            document.getElementById('PImg').src=property.val().Image;
+            document.getElementById('PDec').innerText=property.val().Description;
+            document.getElementById('location').innerHTML+=
+            '<span  class="fa fa-map-marker icon" onclick="SClick(\'https://maps.google.com/?q='+property.val().Location['lat']+','+property.val().Location['lng']+'\')"></span>';
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
           }
         });
       });
@@ -191,6 +266,7 @@
     var count=0;
     firebase.database().ref("Reviews").orderByChild('PID').equalTo(PID).once('value').then(function(snapshot){
       snapshot.forEach(function(Review){
+<<<<<<< HEAD
         count++;
         var Reviewerid=Review.val().UID;
         var ReviewDate= Review.val().DateTime;
@@ -225,6 +301,51 @@
 
     });
 
+=======
+        var Reviewerid=Review.val().UID;
+        var ReviewDate= Review.val().DateTime;
+        var ReviewTxt= Review.val().Txt;
+        firebase.database().ref("Reviews").child(Review.key).child('Like').once('value').then(function (likesnapshot){
+         
+          firebase.database().ref("Reviews").child(Review.key).child('Dislike').once('value').then(function (dlikesnapshot){
+            
+            firebase.database().ref("MEMBER").child(Reviewerid).once('value').then(function(Reviewer){
+             var ReviewerName= Reviewer.val().FullName;
+             var ReviewerImage= Reviewer.val().ProfileImage;
+             var numberOfReviews;
+             firebase.database().ref("Reviews").orderByChild('UID').equalTo(Reviewerid).once('value').then(function(r){
+              numberOfReviews=r.numChildren();
+              ReviewLike=likesnapshot.numChildren()-1;
+              ReviewDislike=dlikesnapshot.numChildren()-1;
+              document.getElementById('reviewList').innerHTML+=
+                '<div class="singelReview"  >'+
+                '<div class="row3">'+
+                '<img src="'+ReviewerImage+'" width="100" height="100"/>'+
+                '<div style="margin-left: 3%;margin-bottom: 3%;">'+
+                '<h1>'+ReviewerName+'</h4>'+
+                '<p class="p-lite">'+numberOfReviews+' Review</p>'+
+                ' <p class="p-lite">5 Thiqah</p>'+
+                '  <p class="p-lite">'+ReviewDate+'</p>'+
+                ' </div>'+
+                ' </div>'+
+                ' <p>'+ReviewTxt+'</p>'+
+                ' <div class="row5">'+
+                '<span onclick="addLike(\''+Review.key+'\')" class="icon fa fa-thumbs-up"></span>'+
+                '<p id="likeCount" class="marginAuto">'+ReviewLike+'</p>'+
+                '<span onclick="addDislike(\''+Review.key+'\')" class="icon fa fa-thumbs-down"></span>'+
+                ' <p id="dislikeCount" class="marginAuto">'+ReviewDislike+'</p>'+
+                '  </div>'+
+                ' </div>';
+             });
+            });
+
+          });
+        });
+
+      });
+    });
+   
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
    function SClick(url){
     var win = window.open(url, '_blank');
     win.focus();
@@ -232,7 +353,98 @@
   function addReview(){
     window.location.href="WriteReview.html?p="+PID;
   }
+<<<<<<< HEAD
    
+=======
+  function goToReview(Rid){
+    window.location.href="SingleReview.html?R="+Rid;
+  }
+
+  function addLike(RID)
+{
+  var uu = sessionStorage.getItem('userId22');
+  if(uu===null)
+  {
+    window.location ="Login.html";
+  }else
+  {
+    firebase.database().ref("Reviews").child(RID).child('UID').once('value').then(function (uidsnap){
+      if(uu!=uidsnap.val())
+      {
+        firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).once('value').then(function (RDLsnap){
+          isthereDislike=RDLsnap.val();
+          if(isthereDislike!=null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).remove();
+          }
+        });
+        firebase.database().ref("Reviews").child(RID).child('Like').child(uu).once('value').then(function (RLsnap){
+         var isthereLike= RLsnap.val();
+          if(isthereLike===null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Like').child(uu).set(1);
+            location.reload();
+          }else
+          {
+            alert("You liked this Review already !");
+          }
+        });
+      }else
+      {
+        alert("Can't  Like your self !");
+      }
+    });
+    
+  }
+}
+function addDislike(RID)
+{
+  var uu = sessionStorage.getItem('userId22');
+  if(uu===null)
+  {
+    window.location ="Login.html";
+  }
+  else
+  {
+    firebase.database().ref("Reviews").child(RID).child('UID').once('value').then(function (uidsnap){
+      
+      if(uu!=uidsnap.val())
+      {
+        firebase.database().ref("Reviews").child(RID).child('Like').child(uu).once('value').then(function (RLsnap){
+          isthereLike=RLsnap.val();
+          
+          if(isthereLike!=null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Like').child(uu).remove();
+          }
+        });
+        firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).once('value').then(function (RDLsnap){
+         var isthereDislike= RDLsnap.val();
+          if(isthereDislike===null)
+          {
+            firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).set(1);
+            location.reload();
+          }else
+          {
+            alert("You disliked this Review already !")
+          }
+        });
+      }else
+      {
+        alert("Can't  Dislike your self !")
+      }
+    });
+    
+  }
+}
+
+
+  function logout()
+  {
+   sessionStorage.removeItem('userId22');
+   window.location.href = "HomePage2.html"
+  }
+>>>>>>> 1132a9fcc2120f8fb3700f402d7a5125ea2b4b4f
   </script>
 </body>
 

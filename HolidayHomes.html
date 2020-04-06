@@ -1,4 +1,4 @@
-@@ -1,440 +0,0 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -313,41 +313,53 @@ if(city!=null)
         if(property.val().City===city)
         {
           firebase.database().ref("Reviews").orderByChild('PID').equalTo(property.key).once('value').then(function (reviewSnap){
+            
             pid=property.key;
             pName=property.val().PropertyName;
             pDec=property.val().Description;
             pImg=property.val().Image;
             pReviewCount = reviewSnap.numChildren();
-            
-            document.getElementById('homsList').innerHTML+=
-            '<div class="singlehome">'+
-              ' <div class="col1">'+
-                '  <img class="HImage"  src="'+pImg+'"/>'+
-                '  </div>'+
-               
-                ' <div class="col2">'+
-                  '  <h2   >'+pName+'</h2>'+
-                  '  <P >'+pDec+'</P>'+
-                  '  </div>'+
-                  ' <div class="col3" >'+
-                    ' <div class="row ">'+
-                      '   <span onClick="addReview(\''+pid+'\')" class="fa fa-clipboard matginAuto" style="margin-right: 10px;cursor: pointer;"></span>'+
-                      ' <p class="matginAuto" style="margin-left: 0;">'+pReviewCount+' Reviews</p>'+
-                      '  </div>'+
-                      ' <div class="row ">'+
-                        '  <span class="fa fa-star matginAuto" style="margin-right: 10px; color:gold"></span>'+
-                        '  <p class="matginAuto" style="margin-left: 0;">'+'</p> '+
-                        ' </div>'+
-                        ' <button onClick="redirect(\''+pid+'\')" class="">More Info</button>'+
-                 
-                        ' </div>'+
-                        ' </div>';
+            pRate=0;
+            i=0;
+            reviewSnap.forEach(function (review){
+              pRate+= parseInt(review.val().Rate);
+              i++;
+              if(pReviewCount===i)
+              {
+                pRate=pRate/pReviewCount;
 
+                document.getElementById('homsList').innerHTML+=
+                '<div class="singlehome">'+
+                  ' <div class="col1">'+
+                    '  <img class="HImage"  src="'+pImg+'"/>'+
+                    '  </div>'+
+                   
+                    ' <div class="col2">'+
+                      '  <h2   >'+pName+'</h2>'+
+                      '  <P >'+pDec+'</P>'+
+                      '  </div>'+
+                      ' <div class="col3" >'+
+                        ' <div class="row ">'+
+                          '   <span onClick="addReview(\''+pid+'\')" class="fa fa-clipboard matginAuto" style="margin-right: 10px;cursor: pointer;"></span>'+
+                          ' <p class="matginAuto" style="margin-left: 0;">'+pReviewCount+' Reviews</p>'+
+                          '  </div>'+
+                          ' <div class="row ">'+
+                            '  <span class="fa fa-star matginAuto" style="margin-right: 10px; color:gold"></span>'+
+                            '  <p class="matginAuto" style="margin-left: 0;">'+pRate+' Stars</p> '+
+                            ' </div>'+
+                            ' <button onClick="redirect(\''+pid+'\')" class="">More Info</button>'+
+                     
+                            ' </div>'+
+                            ' </div>';
+
+              }
+            });
+            
+          
     
           });
-  
         }
-  
+        
         
       });
     });
@@ -366,30 +378,69 @@ firebase.database().ref("Property").once('value').then(function (snapshot){
         pDec=property.val().Description;
         pImg=property.val().Image;
         pReviewCount = reviewSnap.numChildren();
-        
-        document.getElementById('homsList').innerHTML+=
-        '<div class="singlehome">'+
-          ' <div class="col1">'+
-            '  <img class="HImage"  src="'+pImg+'"/>'+
-            '  </div>'+
-           
-            ' <div class="col2">'+
-              '  <h2   >'+pName+'</h2>'+
-              '  <P >'+pDec+'</P>'+
-              '  </div>'+
-              ' <div class="col3" >'+
-                ' <div class="row ">'+
-                  '   <span onClick="addReview(\''+pid+'\')" class="fa fa-clipboard matginAuto" style="margin-right: 10px;cursor: pointer;"></span>'+
-                  ' <p class="matginAuto" style="margin-left: 0;">'+pReviewCount+' Reviews</p>'+
+        pRate=0;
+        i=0;
+        if(reviewSnap.val()===null)
+        {
+          document.getElementById('homsList').innerHTML+=
+            '<div class="singlehome">'+
+              ' <div class="col1">'+
+                '  <img class="HImage"  src="'+pImg+'"/>'+
+                '  </div>'+
+               
+                ' <div class="col2">'+
+                  '  <h2   >'+pName+'</h2>'+
+                  '  <P >'+pDec+'</P>'+
                   '  </div>'+
-                  ' <div class="row ">'+
-                    '  <span class="fa fa-star matginAuto" style="margin-right: 10px; color:gold"></span>'+
-                    '  <p class="matginAuto" style="margin-left: 0;">'+'</p> '+
-                    ' </div>'+
-                    ' <button onClick="redirect(\''+pid+'\')" class="">More Info</button>'+
-             
-                    ' </div>'+
-                    ' </div>';
+                  ' <div class="col3" >'+
+                    ' <div class="row ">'+
+                      '   <span onClick="addReview(\''+pid+'\')" class="fa fa-clipboard matginAuto" style="margin-right: 10px;cursor: pointer;"></span>'+
+                      ' <p class="matginAuto" style="margin-left: 0;">'+pReviewCount+' Reviews</p>'+
+                      '  </div>'+
+                      ' <div class="row ">'+
+                        '  <span class="fa fa-star matginAuto" style="margin-right: 10px; color:gold"></span>'+
+                        '  <p class="matginAuto" style="margin-left: 0;">'+pRate+' Stars</p> '+
+                        ' </div>'+
+                        ' <button onClick="redirect(\''+pid+'\')" class="">More Info</button>'+
+                 
+                        ' </div>'+
+                        ' </div>';
+        }
+        reviewSnap.forEach(function (review){
+          pRate+= parseInt(review.val().Rate);
+          i++;
+          if(pReviewCount===i)
+          {
+            pRate=pRate/pReviewCount;
+            
+
+            document.getElementById('homsList').innerHTML+=
+            '<div class="singlehome">'+
+              ' <div class="col1">'+
+                '  <img class="HImage"  src="'+pImg+'"/>'+
+                '  </div>'+
+               
+                ' <div class="col2">'+
+                  '  <h2   >'+pName+'</h2>'+
+                  '  <P >'+pDec+'</P>'+
+                  '  </div>'+
+                  ' <div class="col3" >'+
+                    ' <div class="row ">'+
+                      '   <span onClick="addReview(\''+pid+'\')" class="fa fa-clipboard matginAuto" style="margin-right: 10px;cursor: pointer;"></span>'+
+                      ' <p class="matginAuto" style="margin-left: 0;">'+pReviewCount+' Reviews</p>'+
+                      '  </div>'+
+                      ' <div class="row ">'+
+                        '  <span class="fa fa-star matginAuto" style="margin-right: 10px; color:gold"></span>'+
+                        '  <p class="matginAuto" style="margin-left: 0;">'+pRate+' Stars</p> '+
+                        ' </div>'+
+                        ' <button onClick="redirect(\''+pid+'\')" class="">More Info</button>'+
+                 
+                        ' </div>'+
+                        ' </div>';
+
+          }
+        });
+       
 
       });
     });

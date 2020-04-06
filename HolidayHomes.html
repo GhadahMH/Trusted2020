@@ -335,7 +335,7 @@ if(city!=null)
                       '  </div>'+
                       ' <div class="row ">'+
                         '  <span class="fa fa-star matginAuto" style="margin-right: 10px; color:gold"></span>'+
-                        '  <p class="matginAuto" style="margin-left: 0;">4.6 Stars</p> '+
+                        '  <p class="matginAuto" style="margin-left: 0;">'+getStar(pid)+'</p> '+
                         ' </div>'+
                         ' <button onClick="redirect(\''+pid+'\')" class="">More Info</button>'+
                  
@@ -384,7 +384,7 @@ firebase.database().ref("Property").once('value').then(function (snapshot){
                   '  </div>'+
                   ' <div class="row ">'+
                     '  <span class="fa fa-star matginAuto" style="margin-right: 10px; color:gold"></span>'+
-                    '  <p class="matginAuto" style="margin-left: 0;">4.6 Stars</p> '+
+                    '  <p class="matginAuto" style="margin-left: 0;">'+getStar(pid)+'</p> '+
                     ' </div>'+
                     ' <button onClick="redirect(\''+pid+'\')" class="">More Info</button>'+
              
@@ -419,12 +419,22 @@ function logout()
           window.location.href = "HomePage2.html"
          }
          
+         function getStar(PID){
+
+          var count=0;
+    firebase.database().ref("Reviews").orderByChild('PID').equalTo(PID).once('value').then(function(snapshot){
+      snapshot.forEach(function(Review){
+        var Reviewerid=Review.val().UID;
+        var ReviewDate= Review.val().DateTime;
+        var ReviewTxt= Review.val().Txt;
+      });
+    });
+    return ReviewTxt;
+         }
 
 
 </script>
 
+ </body>
 
-
-
-    </body>
 </html>

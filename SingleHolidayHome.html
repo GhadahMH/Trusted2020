@@ -250,7 +250,7 @@
          
           firebase.database().ref("Reviews").child(Review.key).child('Dislike').once('value').then(function (dlikesnapshot){
             
-            firebase.database().ref("MEMBER").child(Reviewerid).once('value').then(function(Reviewer){
+                                                  firebase.database().ref("MEMBER").child(Reviewerid).once('value').then(function(Reviewer){
              var ReviewerName= Reviewer.val().FullName;
              var ReviewerImage= Reviewer.val().ProfileImage;
              var numberOfReviews;

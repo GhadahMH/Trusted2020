@@ -452,6 +452,9 @@ span {
         var Reviewerid=Review.val().UID;
         var ReviewDate= Review.val().DateTime;
         var ReviewTxt= Review.val().Txt;
+        var ReviewRate= Review.val().Rate;
+       
+
         firebase.database().ref("Reviews").child(Review.key).child('Like').once('value').then(function (likesnapshot){
          
           firebase.database().ref("Reviews").child(Review.key).child('Dislike').once('value').then(function (dlikesnapshot){
@@ -459,6 +462,7 @@ span {
             firebase.database().ref("MEMBER").child(Reviewerid).once('value').then(function(Reviewer){
              var ReviewerName= Reviewer.val().FullName;
              var ReviewerImage= Reviewer.val().ProfileImage;
+         
              var numberOfReviews;
              firebase.database().ref("Reviews").orderByChild('UID').equalTo(Reviewerid).once('value').then(function(r){
               numberOfReviews=r.numChildren();
@@ -468,6 +472,8 @@ span {
           '<div class="comment__header>"'+'<a class="comment__author" id="author-c-1" style="font-size:25px;" >'+ReviewerName+'</a>'
          + '<span class="comment__reviews"> Reviews: '+numberOfReviews+'</span></div>'
           +'<div class="comment__text">'+ReviewTxt+
+            +'<div class="comment__text">'+ReviewRate+'</p></div>'+
+            
           '<p class="comment__date" style="float: right;">'+ReviewDate+'</p></div>'+
           '<div class="comment__footer">'+'<button class="btn" id="green" onclick="addLike(\''+Review.key+'\')">'+ReviewLike +' <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>'+
           '<button class="btn" id="red" onclick="addDislike(\''+Review.key+'\')">'+ReviewDislike+' <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>'

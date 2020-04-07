@@ -411,7 +411,8 @@ firebase.database().ref("Property").once('value').then(function (snapshot){
           i++;
           if(pReviewCount===i)
           {
-            pRate=pRate/pReviewCount;
+            pRate=Number((pRate/pReviewCount).toFixed(2));
+  
             
 
             document.getElementById('homsList').innerHTML+=

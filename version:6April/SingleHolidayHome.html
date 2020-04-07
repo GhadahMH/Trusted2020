@@ -325,6 +325,8 @@ span {
             <h1 id="propName"></h1>
           </br> </br>
             <p id="desc"> </p>
+            <p id="txtReviewsCount" class="p-lite" style="font-size: 27px;">0 Reviews</p>
+            <p id="txtRate" class="p-lite" style="font-size: 27px;">0 Stars</p>
           </div>
          
         </div>
@@ -399,11 +401,45 @@ span {
         user.forEach(function (property){
           if(property.key===PID)
           {
+
+            reviewCount=0;
+            pRate0=0;
+            i=0;
+            firebase.database().ref("Reviews").orderByChild('PID').equalTo(property.key).once('value').then(function (reviewSnap){
+              if(reviewSnap.val()===null)
+              {
+            
             
             document.getElementById('propName').innerText=property.val().PropertyName;
             document.getElementById('product-img').src=property.val().Image;
             document.getElementById('desc').innerText=property.val().Description;
-            
+          
+            //
+            document.getElementById('txtReviewsCount').innerText=reviewCount+" Reviws";
+                  document.getElementById('txtRate').innerText=pRate0+" Stars";
+                  document.getElementById('location').innerHTML+=
+                  '<span  class="fa fa-map-marker icon" onclick="SClick(\'https://maps.google.com/?q='+property.val().Location['lat']+','+property.val().Location['lng']+'\')"></span>';
+              }
+              reviewCount=reviewSnap.numChildren();
+              reviewSnap.forEach(function(rev){
+                pRate0+= parseInt(rev.val().Rate);
+                i++
+                if(i===reviewCount)
+                {
+                  pRate0=Number((pRate0/reviewCount).toFixed(2));
+                  
+                  property.val().Location['lat']
+                  document.getElementById('propName').innerText=property.val().PropertyName;
+                  document.getElementById('product-img').src=property.val().Image;
+                  document.getElementById('desc').innerText=property.val().Description;
+                  document.getElementById('txtReviewsCount').innerText=reviewCount+" Reviws";
+                  document.getElementById('txtRate').innerText=pRate0+" Stars";
+                  document.getElementById('location').innerHTML+=
+                  '<span  class="fa fa-map-marker icon" onclick="SClick(\'https://maps.google.com/?q='+property.val().Location['lat']+','+property.val().Location['lng']+'\')"></span>';
+                }
+              });
+            });
+
           }
         });
       });
@@ -484,9 +520,10 @@ span {
     Dislike:{'defult':0},
   }).then(function (){
     alert("Review added successfully");
-    document.getElementById('RText').innerHTML="";
-    starmark(0);
+    starmark2(0);
     getReviews();
+    document.getElementById('RText').value=" ";
+   
   });
   }else{
     alert("Error");
@@ -510,6 +547,17 @@ span {
       }
     }
   }
+  function starmark2(i)
+  {
+    if(i<count)
+      {
+        document.getElementById((i+1)+subid).style.color="orange";
+      }else
+      {
+        document.getElementById((i+1)+subid).style.color="black";
+      }
+  }
+   
  function addLike(RID)
 {
   var uu = sessionStorage.getItem('userId22');
@@ -535,7 +583,7 @@ span {
             firebase.database().ref("Reviews").child(RID).child('Like').child(uu).set(1);
             firebase.database().ref("Reviews").child(RID).once('value').then(function (rev){
               reviewOwnerID=rev.val().UID;
-              firebase.database().ref("MEMBER").child(reviewOwnerID).child('FullName').once('value').then(function (name){
+              firebase.database().ref("MEMBER").child(uu).child('FullName').once('value').then(function (name){
                 firebase.database().ref("Notification").push().set({UID:reviewOwnerID,Txt:name.val()+' Liked your Review'});
                 document.getElementById('review').innerHTML='';
                 getReviews();
@@ -584,7 +632,7 @@ function addDislike(RID)
             firebase.database().ref("Reviews").child(RID).child('Dislike').child(uu).set(1);
             firebase.database().ref("Reviews").child(RID).once('value').then(function (rev){
               reviewOwnerID=rev.val().UID;
-              firebase.database().ref("MEMBER").child(reviewOwnerID).child('FullName').once('value').then(function (name){
+               firebase.database().ref("MEMBER").child(uu).child('FullName').once('value').then(function (name){
                 firebase.database().ref("Notification").push().set({UID:reviewOwnerID,Txt:name.val()+' Disliked your Review'});
                 document.getElementById('review').innerHTML='';
                 getReviews();

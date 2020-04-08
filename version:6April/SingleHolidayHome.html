@@ -325,8 +325,12 @@ span {
             <h1 id="propName"></h1>
           </br> </br>
             <p id="desc"> </p>
-            <p id="txtReviewsCount" class="p-lite" style="font-size: 27px;">0 Reviews</p>
-            <p id="txtRate" class="p-lite" style="font-size: 27px;">0 Stars</p>
+        </br>
+            <span id="txtRate" class="p-lite" style="font-size: 27px; display: inline-block;"></span>
+        </br>
+            <span id="txtReviewsCount" class="p-lite" style="font-size: 27px;"></span>
+          
+         
           </div>
          
         </div>
@@ -415,7 +419,7 @@ span {
             document.getElementById('desc').innerText=property.val().Description;
           
             //
-            document.getElementById('txtReviewsCount').innerText=reviewCount+" Reviws";
+            document.getElementById('txtReviewsCount').innerText=reviewCount+" Reviews";
                   document.getElementById('txtRate').innerText=pRate0+" Stars";
                   document.getElementById('location').innerHTML+=
                   '<span  class="fa fa-map-marker icon" onclick="SClick(\'https://maps.google.com/?q='+property.val().Location['lat']+','+property.val().Location['lng']+'\')"></span>';
@@ -432,7 +436,7 @@ span {
                   document.getElementById('propName').innerText=property.val().PropertyName;
                   document.getElementById('product-img').src=property.val().Image;
                   document.getElementById('desc').innerText=property.val().Description;
-                  document.getElementById('txtReviewsCount').innerText=reviewCount+" Reviws";
+                  document.getElementById('txtReviewsCount').innerText=reviewCount+" Reviews";
                   document.getElementById('txtRate').innerText=pRate0+" Stars";
                   document.getElementById('location').innerHTML+=
                   '<span  class="fa fa-map-marker icon" onclick="SClick(\'https://maps.google.com/?q='+property.val().Location['lat']+','+property.val().Location['lng']+'\')"></span>';
@@ -471,10 +475,11 @@ span {
               document.getElementById('review').innerHTML+=
           '<div class="comment__header>"'+'<a class="comment__author" id="author-c-1" style="font-size:25px;" >'+ReviewerName+'</a>'
          + '<span class="comment__reviews"> Reviews: '+numberOfReviews+'</span></div>'
-          +'<div class="comment__text">'+ReviewTxt+
-            +'<div class="comment__text">'+ReviewRate+'</p></div>'+
+          +'<div class="comment__text">'+ReviewTxt+'<p class="comment__date" style="float: right;">'+ReviewDate+'</p>'+
+            '<span class="comment__date" style="float:right; display: inline-block;">'+ReviewRate+' Stars </span></div>'+
+            // +'<div class="comment__footer">'+ReviewRate+' Stars </p></div>'+
             
-          '<p class="comment__date" style="float: right;">'+ReviewDate+'</p></div>'+
+         
           '<div class="comment__footer">'+'<button class="btn" id="green" onclick="addLike(\''+Review.key+'\')">'+ReviewLike +' <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></button>'+
           '<button class="btn" id="red" onclick="addDislike(\''+Review.key+'\')">'+ReviewDislike+' <i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></button>'
           

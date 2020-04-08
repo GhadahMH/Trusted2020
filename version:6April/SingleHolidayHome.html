@@ -325,7 +325,7 @@ span {
             <h1 id="propName"></h1>
           </br> </br>
             <p id="desc"> </p>
-            <p id="txtReviewsCount" class="p-lite" style="font-size: 27px;">0 Reviews</p>
+            <!-- <p id="txtReviewsCount" class="p-lite" style="font-size: 27px;">0 Reviews</p> -->
             <p id="txtRate" class="p-lite" style="font-size: 27px;">0 Stars</p>
           </div>
          
@@ -351,21 +351,21 @@ span {
     <div class="heading">How was your experience?</div>
     <div class="threader">
         <div class="comment-submit">
-           
+          <P style="margin-right: 2%;">Rate</P> 
+          <div class="row2">
+          <span class=" fa fa-star "  onclick="starmark(this)" id="1one" style="font-size: 30px;cursor:pointer" ></span>
+          <span class=" fa fa-star "  onclick="starmark(this)" id="2one" style="font-size: 30px;cursor:pointer" ></span>
+          <span class=" fa fa-star "  onclick="starmark(this)" id="3one" style="font-size: 30px;cursor:pointer" ></span>
+          <span class=" fa fa-star "  onclick="starmark(this)" id="4one" style="font-size: 30px;cursor:pointer" ></span>
+          <span class=" fa fa-star "  onclick="starmark(this)" id="5one" style="font-size: 30px;cursor:pointer" ></span>
+        </div>
                 <input
                         type="text"
                         id="RText"
                         name="comment"
                         class="form-input"
                         placeholder="Share your review.."/>
-                        <P style="margin-right: 2%;">Rate</P> 
-                        <div class="row2">
-                        <span class=" fa fa-star "  onclick="starmark(this)" id="1one" style="font-size: 30px;cursor:pointer" ></span>
-                        <span class=" fa fa-star "  onclick="starmark(this)" id="2one" style="font-size: 30px;cursor:pointer" ></span>
-                        <span class=" fa fa-star "  onclick="starmark(this)" id="3one" style="font-size: 30px;cursor:pointer" ></span>
-                        <span class=" fa fa-star "  onclick="starmark(this)" id="4one" style="font-size: 30px;cursor:pointer" ></span>
-                        <span class=" fa fa-star "  onclick="starmark(this)" id="5one" style="font-size: 30px;cursor:pointer" ></span>
-                      </div>
+                       
                 <button type ="submit" class="btn btn__submit" onclick="addReview()">leave a review</button>
            
 

@@ -285,11 +285,13 @@ nav a:hover {
       <!--DISPLAY PROPERTIES-->
 
                 <div id="prp-list" class="manegPrp-inside"> 
+
                   <div class="col s12 m12 l8">
                     <ul id="projects-collection" class="collection">
                       <li class="collection-item avatar">
                         <!-- <i class="mdi-file-folder circle light-blue darken-2"></i> -->
                         <span class="collection-header" style="color:black; font-family: Cairo, sans-serif; font-weight: bold; text-align: left;">Manage your Properties</span>
+                        <a class="task-cat waves-effect  btn" style="float:right; align:center; width: 20%; color:#300095; background: #eaeaea"type="button" onclick="addprp()"> Add</a>
                         <a href="#" class="secondary-content"><i class="mdi-action-grade"></i></a>
                       </li>
 
@@ -349,7 +351,8 @@ nav a:hover {
           
               document.getElementById("projects-collection").innerHTML+=
              ' <div class="col s5 push-s5">'+'</br>'+'<a class="task-cat waves-effect  btn" onclick="editprp(\'' + prpID + '\')" style="float:right; align:center; width: 20%; color:#300095; background: #eaeaea"type="button"> Edit</a></span>'+
-              '</br> </br>'+'<a class="task-cat waves-effect  btn" onclick="deleteprp(\'' + prpID + '\')" style="float:right; align:center; width: 20%; color:#300095; background: #eaeaea"type="button"> Delete</a>'+
+              '</br> </br>'+'<a class="task-cat waves-effect  btn" onclick="deleteprp(\'' + prpID + '\')" style="float:right; align:center; width: 20%; color:#300095; background: #eaeaea"type="button"> Delete</a>'+ '</br> </br>'+
+              '<a class="task-cat waves-effect  btn"  onclick="viewProp(\''+prpID+'\')"style="float:right; align:center; width: 20%; color:#300095; background: #eaeaea"type="button"> View</a>'+
               '</div>'+ '<div class="col s3">'+'<div id="project-line-1">'+'<canvas width="125" height="20" style="display: inline-block; vertical-align: top; width:125px; height:20px;">'
                 +'</canvas></div>'+ '</div>'+'</div>'+'</li>'+
                 '<li class="collection-item">'+'<div class="row">'+ '<div class=" col s7 pull-s3 ">'+ '<p class="collections-title " style="color:black; font-family: Cairo, sans-serif;  text-align: left;font-size: 30px;"><span>'+prpName+'</span></p>'
@@ -409,7 +412,9 @@ nav a:hover {
          function editprp(PID){
           window.location.href = "EditeProperty.html?c="+PID;
          }
-
+         function viewProp(propertyID){
+          window.location.href="SingleHolidayHome.html?p="+propertyID;
+         }
          function deleteprp(PID)
          {
           firebase.database().ref("Property").child(uu).child(PID).remove().then(function (){
